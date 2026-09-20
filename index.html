@@ -139,574 +139,297 @@ var has = (a,k) => !!a.sym && a.sym.has(k);
 
 var STEPS = [
 
-// ---------- someone was killed ----------
-{when:a=>a.injury==="fatal", cls:"urgent", tag:"First", title:"You do not have to work this out alone",
- html:`<p>Families for Safe Streets is run by people who have lost someone to a traffic
- crash or been seriously injured themselves. They offer free peer mentoring, monthly
- support groups, and help with the logistics below, to anyone in the United States.</p>
- <p><strong>(844) 377-7337</strong> &middot;
- <a href="mailto:info@familiesforsafestreets.org">info@familiesforsafestreets.org</a> &middot;
- <a href="https://www.familiesforsafestreets.org/national-resource-guide">Post-Crash Resource Guide</a>
- (also in <a href="https://ny.familiesforsafestreets.org/resource-guides">Spanish and Chinese</a>).</p>
- <p>Nothing below has to happen today. It is here so that when you are ready, or when
- someone asks you a question you were not expecting, you know what it is about.</p>`},
+// 0010-you-do-not-have-to-work.md
+{when:a=>["fatal"].includes(a.injury), cls:"urgent", tag:"First", title:"You do not have to work this out alone",
+ html:`<p>Families for Safe Streets is run by people who have lost someone to a traffic crash or been seriously injured themselves. They offer free peer mentoring, monthly support groups, and help with the logistics below, to anyone in the United States.</p>
+ <p><strong>(844) 377-7337</strong> · <a href="mailto:info@familiesforsafestreets.org">info@familiesforsafestreets.org</a> · <a href="https://www.familiesforsafestreets.org/national-resource-guide">Post-Crash Resource Guide</a> (also in <a href="https://ny.familiesforsafestreets.org/resource-guides">Spanish and Chinese</a>).</p>
+ <p>Nothing below has to happen today. It is here so that when you are ready, or when someone asks you a question you were not expecting, you know what it is about.</p>`},
 
-{when:a=>a.injury==="fatal", cls:"urgent", tag:"First", title:"Say nothing to any insurer, and sign nothing",
- html:`<p>An adjuster may call within days, sometimes before the funeral, and may be kind
- and sympathetic. Do not give a recorded statement, do not sign a release or a medical
- authorization, and do not accept any payment. Take their name and claim number, say a
- lawyer will be in touch, and hang up.</p>
+// 0020-say-nothing-to-any-insurer-and.md
+{when:a=>["fatal"].includes(a.injury), cls:"urgent", tag:"First", title:"Say nothing to any insurer, and sign nothing",
+ html:`<p>An adjuster may call within days, sometimes before the funeral, and may be kind and sympathetic. Do not give a recorded statement, do not sign a release or a medical authorization, and do not accept any payment. Take their name and claim number, say a lawyer will be in touch, and hang up.</p>
  <p>The same goes for anyone asking you to sign for a "quick" payout of funeral costs.</p>`},
 
-{when:a=>a.injury==="fatal", cls:"deadline", tag:"Investigation", title:"The police investigation, and what to ask for",
- html:`<p>Fatal and critical-injury crashes are handled by a specialist unit rather than
- the responding patrol officer. In New York City that is the NYPD Collision Investigation
- Squad; elsewhere it is a state police or county reconstruction unit.</p>
- <ul class="check">
- <li>Get the name, unit, and direct number of the investigating detective, and ask in writing for updates.</li>
- <li>Ask whether the case has been referred to the District Attorney or county prosecutor, and ask for that office's victim advocate.</li>
- <li>Ask what happened to the bicycle, helmet, phone, and clothing. They are usually held as evidence. Do not let them be discarded, and photograph everything before anyone repairs or cleans it.</li>
- <li>Nearby camera footage is often overwritten within days. Ask investigators to preserve it, and ask nearby businesses yourself.</li>
- <li>You are entitled to the crash report and, in most cases, the reconstruction file. Ask how to request both.</li>
- </ul>
- <p>Investigations often close quietly with no charges. That outcome does not decide your
- civil claim, which is separate and has its own deadlines.</p>`},
+// 0030-the-police-investigation-and-what-to.md
+{when:a=>["fatal"].includes(a.injury), cls:"deadline", tag:"Investigation", title:"The police investigation, and what to ask for",
+ html:`<p>Fatal and critical-injury crashes are handled by a specialist unit rather than the responding patrol officer. In New York City that is the NYPD Collision Investigation Squad; elsewhere it is a state police or county reconstruction unit.</p>
+ <ul class="check"><li>Get the name, unit, and direct number of the investigating detective, and ask in writing for updates.</li><li>Ask whether the case has been referred to the District Attorney or county prosecutor, and ask for that office's victim advocate.</li><li>Ask what happened to the bicycle, helmet, phone, and clothing. They are usually held as evidence. Do not let them be discarded, and photograph everything before anyone repairs or cleans it.</li><li>Nearby camera footage is often overwritten within days. Ask investigators to preserve it, and ask nearby businesses yourself.</li><li>You are entitled to the crash report and, in most cases, the reconstruction file. Ask how to request both.</li></ul>
+ <p>Investigations often close quietly with no charges. That outcome does not decide your civil claim, which is separate and has its own deadlines.</p>`},
 
-{when:a=>a.injury==="fatal", tag:"Practical", title:"Death certificate, medical examiner, and the estate",
- html:`<p>You will need certified copies of the death certificate, and more than you expect:
- order at least ten. The funeral home usually orders them for you.</p>
- <p>The medical examiner or coroner will likely perform an autopsy. You can request the
- report later; it can matter in a claim.</p>
- <p>A wrongful death claim is brought by a personal representative of the estate, not by
- the family directly, and that appointment happens in Surrogate's Court in New York,
- Superior Court in New Jersey, or Probate Court in Connecticut. It takes time, which is
- one reason to talk to a lawyer well before the deadline.</p>`},
+// 0040-death-certificate-medical-examiner-and-the.md
+{when:a=>["fatal"].includes(a.injury), tag:"Practical", title:"Death certificate, medical examiner, and the estate",
+ html:`<p>You will need certified copies of the death certificate, and more than you expect: order at least ten. The funeral home usually orders them for you.</p>
+ <p>The medical examiner or coroner will likely perform an autopsy. You can request the report later; it can matter in a claim.</p>
+ <p>A wrongful death claim is brought by a personal representative of the estate, not by the family directly, and that appointment happens in Surrogate's Court in New York, Superior Court in New Jersey, or Probate Court in Connecticut. It takes time, which is one reason to talk to a lawyer well before the deadline.</p>`},
 
-{when:a=>a.injury==="fatal", tag:"Practical", title:"Crime victim compensation can cover funeral costs",
- html:`<p>Each state runs a fund that can reimburse funeral and burial expenses, counseling,
- and lost support for families of people killed by a criminal act, which can include a
- vehicular offense. These are separate from any lawsuit, and they have their own filing
- deadlines, often measured in months.</p>
- <ul>
- <li>New York: Office of Victim Services, <a href="https://ovs.ny.gov">ovs.ny.gov</a></li>
- <li>New Jersey: Victims of Crime Compensation Office, <a href="https://njvictims.nj.gov">njvictims.nj.gov</a></li>
- <li>Connecticut: Judicial Branch Office of Victim Services, <a href="https://jud.ct.gov/crimevictim">jud.ct.gov/crimevictim</a></li>
- </ul>`},
+// 0050-crime-victim-compensation-can-cover-funeral.md
+{when:a=>["fatal"].includes(a.injury), tag:"Practical", title:"Crime victim compensation can cover funeral costs",
+ html:`<p>Each state runs a fund that can reimburse funeral and burial expenses, counseling, and lost support for families of people killed by a criminal act, which can include a vehicular offense. These are separate from any lawsuit, and they have their own filing deadlines, often measured in months.</p>
+ <ul><li>New York: Office of Victim Services, <a href="https://ovs.ny.gov">ovs.ny.gov</a></li><li>New Jersey: Victims of Crime Compensation Office, <a href="https://njvictims.nj.gov">njvictims.nj.gov</a></li><li>Connecticut: Judicial Branch Office of Victim Services, <a href="https://jud.ct.gov/crimevictim">jud.ct.gov/crimevictim</a></li></ul>`},
 
-{when:a=>a.injury==="fatal" && ["NY","NYC"].includes(a.state), cls:"deadline", tag:"Deadlines",
- title:"New York: wrongful death is two years, not three",
- html:`<p>New York's wrongful death deadline is <strong>two years from the date of death</strong>,
- shorter than the three years for personal injury, and it runs from death rather than from
- the crash. A survival claim for the pain your person suffered before dying has its own
- timing. An estate representative must be appointed before the case can be filed.</p>
- <p>If a city, county, public authority such as the MTA, or the State may be responsible,
- a formal <strong>notice of claim is due within 90 days</strong>. That is the real deadline.
- Call a lawyer this week, not this year.</p>`},
+// 0060-new-york-wrongful-death-is-two.md
+{when:a=>["fatal"].includes(a.injury) && ["NY","NYC"].includes(a.state), cls:"deadline", tag:"Deadlines", title:"New York: wrongful death is two years, not three",
+ html:`<p>New York's wrongful death deadline is <strong>two years from the date of death</strong>, shorter than the three years for personal injury, and it runs from death rather than from the crash. A survival claim for the pain your person suffered before dying has its own timing. An estate representative must be appointed before the case can be filed.</p>
+ <p>If a city, county, public authority such as the MTA, or the State may be responsible, a formal <strong>notice of claim is due within 90 days</strong>. That is the real deadline. Call a lawyer this week, not this year.</p>`},
 
-{when:a=>a.injury==="fatal" && a.state==="NJ", cls:"deadline", tag:"Deadlines",
- title:"New Jersey: two years, and 90 days against a public entity",
- html:`<p>New Jersey's wrongful death deadline is generally <strong>two years from the date
- of death</strong>, brought by the estate's personal representative.</p>
- <p>Under the Tort Claims Act, a claim against a public entity or employee requires written
- notice <strong>within 90 days</strong>. That covers towns, counties, the state, and many
- authorities.</p>`},
+// 0070-new-jersey-two-years-and-90.md
+{when:a=>["fatal"].includes(a.injury) && ["NJ"].includes(a.state), cls:"deadline", tag:"Deadlines", title:"New Jersey: two years, and 90 days against a public entity",
+ html:`<p>New Jersey's wrongful death deadline is generally <strong>two years from the date of death</strong>, brought by the estate's personal representative.</p>
+ <p>Under the Tort Claims Act, a claim against a public entity or employee requires written notice <strong>within 90 days</strong>. That covers towns, counties, the state, and many authorities.</p>`},
 
-{when:a=>a.injury==="fatal" && a.state==="CT", cls:"deadline", tag:"Deadlines",
- title:"Connecticut: two years from death, five years outside",
- html:`<p>Connecticut's wrongful death deadline is generally <strong>two years from the date
- of death</strong>, and in no event more than five years from the act that caused it. The
- claim is brought by the executor or administrator of the estate.</p>
- <p>If the road itself was a cause, the highway defect statutes require written notice to
- the town or the state commissioner <strong>within 90 days</strong>, and courts apply the
- content requirements strictly. Put that one in a lawyer's hands immediately.</p>`},
+// 0080-connecticut-two-years-from-death-five.md
+{when:a=>["fatal"].includes(a.injury) && ["CT"].includes(a.state), cls:"deadline", tag:"Deadlines", title:"Connecticut: two years from death, five years outside",
+ html:`<p>Connecticut's wrongful death deadline is generally <strong>two years from the date of death</strong>, and in no event more than five years from the act that caused it. The claim is brought by the executor or administrator of the estate.</p>
+ <p>If the road itself was a cause, the highway defect statutes require written notice to the town or the state commissioner <strong>within 90 days</strong>, and courts apply the content requirements strictly. Put that one in a lawyer's hands immediately.</p>`},
 
-{when:a=>a.injury==="fatal", tag:"Legal", title:"Choosing a lawyer, without being rushed",
- html:`<p>Consultations are free and these cases are taken on contingency, so talking to
- someone early costs nothing. Ask how many cyclist or pedestrian fatality cases they have
- handled, who will actually work on the file, and how they communicate.</p>
- <p>If a lawyer contacts you first, unsolicited, be wary. Ask the advocacy organizations
- below or a state bar referral service instead.</p>`},
+// 0090-choosing-a-lawyer-without-being-rushed.md
+{when:a=>["fatal"].includes(a.injury), tag:"Legal", title:"Choosing a lawyer, without being rushed",
+ html:`<p>Consultations are free and these cases are taken on contingency, so talking to someone early costs nothing. Ask how many cyclist or pedestrian fatality cases they have handled, who will actually work on the file, and how they communicate.</p>
+ <p>If a lawyer contacts you first, unsolicited, be wary. Ask the advocacy organizations below or a state bar referral service instead.</p>`},
 
-{when:a=>a.injury==="fatal", tag:"Grief", title:"Grief, and the parts nobody warns you about",
- html:`<p>Traumatic loss is not ordinary grief. Intrusive images, anger at the investigation,
- guilt over details that were never yours to control, and exhaustion from paperwork are all
- common, and they can arrive months later. Trauma-informed therapy helps, and grief groups
- of people who lost someone the same way help in a different way.</p>
- <p>Reporters may contact you. You are never obligated to speak to them, and you can ask a
- friend to field it.</p>
- <p>In crisis, call or text <strong>988</strong>. Families for Safe Streets peer mentoring is
- at <strong>(844) 377-7337</strong>.</p>`},
+// 0100-grief-and-the-parts-nobody-warns.md
+{when:a=>["fatal"].includes(a.injury), tag:"Grief", title:"Grief, and the parts nobody warns you about",
+ html:`<p>Traumatic loss is not ordinary grief. Intrusive images, anger at the investigation, guilt over details that were never yours to control, and exhaustion from paperwork are all common, and they can arrive months later. Trauma-informed therapy helps, and grief groups of people who lost someone the same way help in a different way.</p>
+ <p>Reporters may contact you. You are never obligated to speak to them, and you can ask a friend to field it.</p>
+ <p>In crisis, call or text <strong>988</strong>. Families for Safe Streets peer mentoring is at <strong>(844) 377-7337</strong>.</p>`},
 
-// ---------- at the scene ----------
-{when:a=>a.when==="scene", cls:"urgent", tag:"Right now", title:"Get out of traffic, then stay put",
- html:`<p>Move yourself and the bike to a sidewalk or shoulder if you can do it safely.
- If your neck or back hurts, or you cannot feel part of your body, do not move: call 911 and wait.</p>
- <p>Do not tell anyone you are fine. Adrenaline hides injuries for hours. Say
- "I need to be checked out."</p>`},
+// 0110-get-out-of-traffic-then-stay.md
+{when:a=>["scene"].includes(a.when), cls:"urgent", tag:"Right now", title:"Get out of traffic, then stay put",
+ html:`<p>Move yourself and the bike to a sidewalk or shoulder if you can do it safely. If your neck or back hurts, or you cannot feel part of your body, do not move: call 911 and wait.</p>
+ <p>Do not tell anyone you are fine. Adrenaline hides injuries for hours. Say "I need to be checked out."</p>`},
 
-// ---------- first aid, by symptom ----------
-{when:a=>a.injury!=="fatal", cls:"urgent", tag:"First aid", title:"Stop and call 911 if any of these are true",
- html:`<p>Whatever else is going on, these mean an ambulance, not a car ride and not a
- wait-and-see:</p>
- <ul>
- <li>Not fully awake, confused, or cannot remember the crash</li>
- <li>Bleeding that does not slow after several minutes of firm pressure</li>
- <li>Neck or back pain, or numbness, tingling, or weakness anywhere</li>
- <li>Trouble breathing, or chest pain that worsens when breathing in</li>
- <li>A limb that looks bent wrong, or bone visible through skin</li>
- <li>Belly pain, a rigid or swelling abdomen, or pain at the tip of the shoulder</li>
- <li>Repeated vomiting, a seizure, or clear fluid from the nose or ear</li>
- <li>Pregnancy, a bleeding disorder, or any blood thinner, after any real impact</li>
- </ul>
- <p>Everything below is first aid, not a diagnosis. It buys time until someone qualified
- looks at you. When you are unsure, assume the worse thing and call.</p>`},
+// 0120-stop-and-call-911-if-any.md
+{when:a=>!["fatal"].includes(a.injury), cls:"urgent", tag:"First aid", title:"Stop and call 911 if any of these are true",
+ html:`<p>Whatever else is going on, these mean an ambulance, not a car ride and not a wait-and-see:</p>
+ <ul><li>Not fully awake, confused, or cannot remember the crash</li><li>Bleeding that does not slow after several minutes of firm pressure</li><li>Neck or back pain, or numbness, tingling, or weakness anywhere</li><li>Trouble breathing, or chest pain that worsens when breathing in</li><li>A limb that looks bent wrong, or bone visible through skin</li><li>Belly pain, a rigid or swelling abdomen, or pain at the tip of the shoulder</li><li>Repeated vomiting, a seizure, or clear fluid from the nose or ear</li><li>Pregnancy, a bleeding disorder, or any blood thinner, after any real impact</li></ul>
+ <p>Everything below is first aid, not a diagnosis. It buys time until someone qualified looks at you. When you are unsure, assume the worse thing and call.</p>`},
 
-{when:a=>a.injury!=="fatal" && has(a,"neck"), cls:"urgent", tag:"First aid",
- title:"Neck or back pain: stop moving",
- html:`<p>Do not get up, do not let anyone help you up, and do not take your helmet off.
- Call 911 and stay where you are, even if you are in an awkward spot, unless there is an
- immediate danger like fire or traffic that cannot be blocked.</p>
- <p>If you must be moved, someone should hold your head in line with your shoulders and
- move your whole body as one unit, without twisting.</p>
- <p>Spinal injuries can feel like a stiff neck for the first hour. The cost of waiting for
- an ambulance is an hour. The cost of standing up is potentially permanent.</p>`},
+// 0130-neck-or-back-pain-stop-moving.md
+{when:a=>!["fatal"].includes(a.injury) && ["neck"].some(k=>has(a,k)), cls:"urgent", tag:"First aid", title:"Neck or back pain: stop moving",
+ html:`<p>Do not get up, do not let anyone help you up, and do not take your helmet off. Call 911 and stay where you are, even if you are in an awkward spot, unless there is an immediate danger like fire or traffic that cannot be blocked.</p>
+ <p>If you must be moved, someone should hold your head in line with your shoulders and move your whole body as one unit, without twisting.</p>
+ <p>Spinal injuries can feel like a stiff neck for the first hour. The cost of waiting for an ambulance is an hour. The cost of standing up is potentially permanent.</p>`},
 
-{when:a=>a.injury!=="fatal" && has(a,"bleed"), cls:"urgent", tag:"First aid",
- title:"Heavy bleeding: firm, constant pressure",
- html:`<ul class="check">
- <li>Press hard directly on the wound with a cloth, a jersey, a glove, anything. Firm and continuous beats gentle and fidgety.</li>
- <li>Hold it for a full ten minutes without lifting to peek. Lifting restarts the clock.</li>
- <li>If blood soaks through, add more cloth on top. Do not remove the first layer.</li>
- <li>Raise the limb above the heart if doing so does not cause pain that suggests a fracture.</li>
- <li>Do not pull out anything embedded in the wound: glass, metal, a branch. Pad around it and leave it for the hospital.</li>
- </ul>
- <p>If bleeding from an arm or leg is spurting or will not slow, and you have a tourniquet
- or a belt and strap, apply it high and tight above the wound, tighten until the bleeding
- stops, and note the time. That limb needs an emergency room immediately.</p>
- <p>Feeling cold, clammy, grey, or suddenly very thirsty is shock. Lie down, stay warm,
- and call 911.</p>`},
+// 0140-heavy-bleeding-firm-constant-pressure.md
+{when:a=>!["fatal"].includes(a.injury) && ["bleed"].some(k=>has(a,k)), cls:"urgent", tag:"First aid", title:"Heavy bleeding: firm, constant pressure",
+ html:`<ul class="check"><li>Press hard directly on the wound with a cloth, a jersey, a glove, anything. Firm and continuous beats gentle and fidgety.</li><li>Hold it for a full ten minutes without lifting to peek. Lifting restarts the clock.</li><li>If blood soaks through, add more cloth on top. Do not remove the first layer.</li><li>Raise the limb above the heart if doing so does not cause pain that suggests a fracture.</li><li>Do not pull out anything embedded in the wound: glass, metal, a branch. Pad around it and leave it for the hospital.</li></ul>
+ <p>If bleeding from an arm or leg is spurting or will not slow, and you have a tourniquet or a belt and strap, apply it high and tight above the wound, tighten until the bleeding stops, and note the time. That limb needs an emergency room immediately.</p>
+ <p>Feeling cold, clammy, grey, or suddenly very thirsty is shock. Lie down, stay warm, and call 911.</p>`},
 
-{when:a=>a.injury!=="fatal" && has(a,"chest"), cls:"urgent", tag:"First aid",
- title:"Chest pain or trouble breathing",
- html:`<p>Call 911 now if breathing is getting harder, you feel short of breath at rest,
- your lips or fingertips look blue or grey, or the pain is sharp and stabs with each breath
- in. A broken rib can puncture a lung, and that can worsen over minutes to hours.</p>
- <p>If you are breathing comfortably and it hurts only when you press or twist, it is more
- likely a bruised or cracked rib. There is no strapping or binding: that causes pneumonia.
- Instead, hug a pillow against your chest when you cough, and cough deliberately every hour
- even though it hurts, to keep the lung bases open.</p>
- <p>Go back to a doctor for any new fever, a wet cough, or breathing that gets worse over
- the next few days.</p>`},
+// 0150-chest-pain-or-trouble-breathing.md
+{when:a=>!["fatal"].includes(a.injury) && ["chest"].some(k=>has(a,k)), cls:"urgent", tag:"First aid", title:"Chest pain or trouble breathing",
+ html:`<p>Call 911 now if breathing is getting harder, you feel short of breath at rest, your lips or fingertips look blue or grey, or the pain is sharp and stabs with each breath in. A broken rib can puncture a lung, and that can worsen over minutes to hours.</p>
+ <p>If you are breathing comfortably and it hurts only when you press or twist, it is more likely a bruised or cracked rib. There is no strapping or binding: that causes pneumonia. Instead, hug a pillow against your chest when you cough, and cough deliberately every hour even though it hurts, to keep the lung bases open.</p>
+ <p>Go back to a doctor for any new fever, a wet cough, or breathing that gets worse over the next few days.</p>`},
 
-{when:a=>a.injury!=="fatal" && has(a,"abdo"), cls:"urgent", tag:"First aid",
- title:"Belly pain: this is the one that hides",
- html:`<p>Handlebars hit the abdomen hard and can injure the spleen, liver, or bowel with
- almost nothing to see on the outside. Bleeding inside can take hours or occasionally days
- to declare itself, and people have died going home feeling bruised.</p>
- <p><strong>Emergency room now</strong> for: pain that is worsening rather than settling,
- a belly that is rigid, swollen, or tender all over, pain at the tip of the left shoulder,
- blood in urine, vomit, or stool, or any bruise in the shape of the bars or your seat.</p>
- <p>If you were hit in the abdomen at speed, get it checked even if it feels manageable.
- Nothing by mouth on the way, in case a surgeon needs you empty.</p>`},
+// 0160-belly-pain-this-is-the-one.md
+{when:a=>!["fatal"].includes(a.injury) && ["abdo"].some(k=>has(a,k)), cls:"urgent", tag:"First aid", title:"Belly pain: this is the one that hides",
+ html:`<p>Handlebars hit the abdomen hard and can injure the spleen, liver, or bowel with almost nothing to see on the outside. Bleeding inside can take hours or occasionally days to declare itself, and people have died going home feeling bruised.</p>
+ <p><strong>Emergency room now</strong> for: pain that is worsening rather than settling, a belly that is rigid, swollen, or tender all over, pain at the tip of the left shoulder, blood in urine, vomit, or stool, or any bruise in the shape of the bars or your seat.</p>
+ <p>If you were hit in the abdomen at speed, get it checked even if it feels manageable. Nothing by mouth on the way, in case a surgeon needs you empty.</p>`},
 
-{when:a=>a.injury!=="fatal" && has(a,"head"), cls:"urgent", tag:"First aid",
- title:"Headache, dizziness, or feeling foggy",
- html:`<p>Treat this as a concussion until a clinician says otherwise, helmet or not, loss
- of consciousness or not. Get seen today.</p>
- <p><strong>Emergency room immediately</strong> if the headache keeps worsening, you vomit
- more than once, you are confused or slurring, one pupil is larger, you have a seizure,
- there is weakness or numbness, or clear fluid drains from the nose or ear. Anyone on a
- blood thinner goes regardless.</p>
+// 0170-headache-dizziness-or-feeling-foggy.md
+{when:a=>!["fatal"].includes(a.injury) && ["head"].some(k=>has(a,k)), cls:"urgent", tag:"First aid", title:"Headache, dizziness, or feeling foggy",
+ html:`<p>Treat this as a concussion until a clinician says otherwise, helmet or not, loss of consciousness or not. Get seen today.</p>
+ <p><strong>Emergency room immediately</strong> if the headache keeps worsening, you vomit more than once, you are confused or slurring, one pupil is larger, you have a seizure, there is weakness or numbness, or clear fluid drains from the nose or ear. Anyone on a blood thinner goes regardless.</p>
  <p>Otherwise, for the next 24 to 48 hours:</p>
- <ul class="check">
- <li>Have someone stay with you tonight, or check on you. Sleeping is fine, being alone is not.</li>
- <li>No riding, no driving, no alcohol, no workouts.</li>
- <li>Screens and noise in short doses. If a symptom flares, stop and rest, then try again later.</li>
- <li>For pain, acetaminophen (Tylenol) is generally preferred over ibuprofen or aspirin in the first day or two, since those affect bleeding. Confirm with a clinician, especially about your own medications.</li>
- <li>Light walking from day two onward helps recovery more than a dark room does.</li>
- </ul>
- <p>Do not go back to riding in traffic until symptoms are gone at rest and with exertion.
- A second impact before the first heals is far more dangerous than the first.</p>`},
+ <ul class="check"><li>Have someone stay with you tonight, or check on you. Sleeping is fine, being alone is not.</li><li>No riding, no driving, no alcohol, no workouts.</li><li>Screens and noise in short doses. If a symptom flares, stop and rest, then try again later.</li><li>For pain, acetaminophen (Tylenol) is generally preferred over ibuprofen or aspirin in the first day or two, since those affect bleeding. Confirm with a clinician, especially about your own medications.</li><li>Light walking from day two onward helps recovery more than a dark room does.</li></ul>
+ <p>Do not go back to riding in traffic until symptoms are gone at rest and with exertion. A second impact before the first heals is far more dangerous than the first.</p>`},
 
-{when:a=>a.injury!=="fatal" && has(a,"bone"), tag:"First aid",
- title:"Suspected broken bone",
- html:`<p>Assume it is broken if there is deformity, grinding, an inability to bear weight
- or use the limb, or pain directly over the bone rather than the soft tissue.</p>
- <ul class="check">
- <li>Do not try to straighten it or push anything back into place.</li>
- <li>Support it in the position you found it. A rolled jacket, a magazine, or a jersey tied as a sling all work.</li>
- <li>Rings and watches come off now, before swelling makes that a cutting job.</li>
- <li>Ice over cloth, 20 minutes at a time, never directly on skin.</li>
- <li>Bone through skin, or a wound over a suspected fracture, means 911 and a sterile cover. Do not wash it out.</li>
- <li>If fingers or toes beyond the injury are white, blue, cold, or numb, that is urgent: 911.</li>
- </ul>`},
+// 0180-suspected-broken-bone.md
+{when:a=>!["fatal"].includes(a.injury) && ["bone"].some(k=>has(a,k)), tag:"First aid", title:"Suspected broken bone",
+ html:`<p>Assume it is broken if there is deformity, grinding, an inability to bear weight or use the limb, or pain directly over the bone rather than the soft tissue.</p>
+ <ul class="check"><li>Do not try to straighten it or push anything back into place.</li><li>Support it in the position you found it. A rolled jacket, a magazine, or a jersey tied as a sling all work.</li><li>Rings and watches come off now, before swelling makes that a cutting job.</li><li>Ice over cloth, 20 minutes at a time, never directly on skin.</li><li>Bone through skin, or a wound over a suspected fracture, means 911 and a sterile cover. Do not wash it out.</li><li>If fingers or toes beyond the injury are white, blue, cold, or numb, that is urgent: 911.</li></ul>`},
 
-{when:a=>a.injury!=="fatal" && has(a,"shoulder"), tag:"First aid",
- title:"Shoulder or collarbone",
- html:`<p>The collarbone is the classic cycling fracture: you land on the shoulder, and the
- bone takes it. A visible bump or step in the bone, or pain that spikes when you lift the
- arm, points that way. A separated AC joint feels similar.</p>
- <p>Support the arm in a sling with the elbow bent at about 90 degrees, so the weight comes
- off the shoulder, and ice over cloth. Get an x-ray; most collarbone fractures heal without
- surgery, but which ones do depends on the pattern, and that decision is time-sensitive.</p>
- <p>If the arm is numb, cold, or weak, or the skin over the bone is tented and pale, go to
- an emergency room now rather than urgent care.</p>`},
+// 0190-shoulder-or-collarbone.md
+{when:a=>!["fatal"].includes(a.injury) && ["shoulder"].some(k=>has(a,k)), tag:"First aid", title:"Shoulder or collarbone",
+ html:`<p>The collarbone is the classic cycling fracture: you land on the shoulder, and the bone takes it. A visible bump or step in the bone, or pain that spikes when you lift the arm, points that way. A separated AC joint feels similar.</p>
+ <p>Support the arm in a sling with the elbow bent at about 90 degrees, so the weight comes off the shoulder, and ice over cloth. Get an x-ray; most collarbone fractures heal without surgery, but which ones do depends on the pattern, and that decision is time-sensitive.</p>
+ <p>If the arm is numb, cold, or weak, or the skin over the bone is tented and pale, go to an emergency room now rather than urgent care.</p>`},
 
-{when:a=>a.injury!=="fatal" && has(a,"wrist"), tag:"First aid",
- title:"Wrist or hand: ask specifically about the scaphoid",
- html:`<p>Landing on an outstretched hand commonly breaks the scaphoid, a small wrist bone.
- It matters because <strong>the first x-ray is often normal</strong>, people are told they
- sprained it, and the bone then fails to heal and causes lasting arthritis.</p>
- <p>The tell is tenderness in the anatomical snuffbox, the hollow at the base of the thumb
- when you stick the thumb out. If pressing there hurts, say the word "scaphoid" to the
- clinician and ask about a splint and a repeat x-ray or scan in 10 to 14 days even if the
- first film is clean.</p>
+// 0200-wrist-or-hand-ask-specifically-about.md
+{when:a=>!["fatal"].includes(a.injury) && ["wrist"].some(k=>has(a,k)), tag:"First aid", title:"Wrist or hand: ask specifically about the scaphoid",
+ html:`<p>Landing on an outstretched hand commonly breaks the scaphoid, a small wrist bone. It matters because <strong>the first x-ray is often normal</strong>, people are told they sprained it, and the bone then fails to heal and causes lasting arthritis.</p>
+ <p>The tell is tenderness in the anatomical snuffbox, the hollow at the base of the thumb when you stick the thumb out. If pressing there hurts, say the word "scaphoid" to the clinician and ask about a splint and a repeat x-ray or scan in 10 to 14 days even if the first film is clean.</p>
  <p>Meanwhile: splint the wrist, rings off, ice over cloth, elevate above the heart.</p>`},
 
-{when:a=>a.injury!=="fatal" && has(a,"rash"), tag:"First aid",
- title:"Road rash: get the grit out, keep it moist",
- html:`<p>This is a burn, not a scrape, and it scars like one if it is treated casually or
- left with debris in it.</p>
- <ul class="check">
- <li>Wash your hands, then rinse the wound under cool running water for several minutes. Volume does the work.</li>
- <li>Clean around it with mild soap. Get every piece of grit, gravel, and thread out, with tweezers cleaned in alcohol if needed. Anything left behind tattoos permanently and invites infection.</li>
- <li>Do not use hydrogen peroxide, iodine, or alcohol in the wound. They damage healing tissue.</li>
- <li>Apply a thin layer of plain petroleum jelly or antibiotic ointment, then a non-stick dressing.</li>
- <li><strong>Keep it moist and covered.</strong> Change the dressing daily. A scab is slower and scars worse than a wound kept moist.</li>
- <li>Photograph it before you cover it, and again every few days.</li>
- </ul>
- <p>Get medical help for: grit you cannot remove, a wound deeper than the top layer or wider
- than your palm, anything over a joint, exposed fat or muscle, or any wound that needs
- stitches, which generally means within a few hours.</p>
- <p>Get a tetanus booster if yours is more than five years old. Watch for spreading redness,
- increasing pain after day two, pus, red streaks, or fever, and get seen if any appear.</p>`},
+// 0210-road-rash-get-the-grit-out.md
+{when:a=>!["fatal"].includes(a.injury) && ["rash"].some(k=>has(a,k)), tag:"First aid", title:"Road rash: get the grit out, keep it moist",
+ html:`<p>This is a burn, not a scrape, and it scars like one if it is treated casually or left with debris in it.</p>
+ <ul class="check"><li>Wash your hands, then rinse the wound under cool running water for several minutes. Volume does the work.</li><li>Clean around it with mild soap. Get every piece of grit, gravel, and thread out, with tweezers cleaned in alcohol if needed. Anything left behind tattoos permanently and invites infection.</li><li>Do not use hydrogen peroxide, iodine, or alcohol in the wound. They damage healing tissue.</li><li>Apply a thin layer of plain petroleum jelly or antibiotic ointment, then a non-stick dressing.</li><li><strong>Keep it moist and covered.</strong> Change the dressing daily. A scab is slower and scars worse than a wound kept moist.</li><li>Photograph it before you cover it, and again every few days.</li></ul>
+ <p>Get medical help for: grit you cannot remove, a wound deeper than the top layer or wider than your palm, anything over a joint, exposed fat or muscle, or any wound that needs stitches, which generally means within a few hours.</p>
+ <p>Get a tetanus booster if yours is more than five years old. Watch for spreading redness, increasing pain after day two, pus, red streaks, or fever, and get seen if any appear.</p>`},
 
-{when:a=>a.injury!=="fatal" && has(a,"face"), tag:"First aid",
- title:"Teeth, face, or eye",
- html:`<p><strong>A knocked-out adult tooth is a one-hour emergency.</strong> Pick it up by
- the crown, never the root. If it is dirty, rinse briefly in milk or saline, not water, and
- do not scrub it. Put it straight back in the socket and bite gently on a cloth. If you
- cannot, keep it in milk, or in your own saliva against the inside of your cheek if you are
- alert. Get to a dentist or emergency room immediately. Time in the socket is what decides
- whether the tooth survives.</p>
+// 0220-teeth-face-or-eye.md
+{when:a=>!["fatal"].includes(a.injury) && ["face"].some(k=>has(a,k)), tag:"First aid", title:"Teeth, face, or eye",
+ html:`<p><strong>A knocked-out adult tooth is a one-hour emergency.</strong> Pick it up by the crown, never the root. If it is dirty, rinse briefly in milk or saline, not water, and do not scrub it. Put it straight back in the socket and bite gently on a cloth. If you cannot, keep it in milk, or in your own saliva against the inside of your cheek if you are alert. Get to a dentist or emergency room immediately. Time in the socket is what decides whether the tooth survives.</p>
  <p>Chipped or loosened teeth also need a dentist promptly. Save any fragments in milk.</p>
- <p>For the face: pressure for bleeding, ice over cloth for swelling. A nosebleed means
- leaning forward and pinching the soft part for ten minutes. Numbness in the cheek or lip,
- double vision, a change in your bite, or an eye socket that feels different means an
- emergency room.</p>
- <p>For the eye: do not rub it and do not remove anything stuck in it. Cover it with
- something rigid rather than a pad if it is punctured, cover both eyes if you can, and go.
- Vision loss, flashes, floaters, or blood in the coloured part are all emergencies.</p>`},
+ <p>For the face: pressure for bleeding, ice over cloth for swelling. A nosebleed means leaning forward and pinching the soft part for ten minutes. Numbness in the cheek or lip, double vision, a change in your bite, or an eye socket that feels different means an emergency room.</p>
+ <p>For the eye: do not rub it and do not remove anything stuck in it. Cover it with something rigid rather than a pad if it is punctured, cover both eyes if you can, and go. Vision loss, flashes, floaters, or blood in the coloured part are all emergencies.</p>`},
 
-{when:a=>a.injury!=="fatal" && has(a,"numb"), cls:"urgent", tag:"First aid",
- title:"Numbness, tingling, or weakness",
- html:`<p>New numbness or weakness after a crash is a call-911 symptom, not a
- wait-until-morning symptom, because it can mean a spinal cord or nerve injury. That is
- especially true if it affects both sides, a whole limb, or anything below the waist, or if
- you have neck or back pain with it.</p>
- <p>Do not move around while waiting. Note exactly which fingers, toes, or areas are
- affected, and whether it is changing. That detail genuinely helps whoever sees you.</p>
- <p>Long-standing pins and needles in the hands from gripping the bars is a different, benign
- thing. New since the crash is what matters.</p>`},
+// 0230-numbness-tingling-or-weakness.md
+{when:a=>!["fatal"].includes(a.injury) && ["numb"].some(k=>has(a,k)), cls:"urgent", tag:"First aid", title:"Numbness, tingling, or weakness",
+ html:`<p>New numbness or weakness after a crash is a call-911 symptom, not a wait-until-morning symptom, because it can mean a spinal cord or nerve injury. That is especially true if it affects both sides, a whole limb, or anything below the waist, or if you have neck or back pain with it.</p>
+ <p>Do not move around while waiting. Note exactly which fingers, toes, or areas are affected, and whether it is changing. That detail genuinely helps whoever sees you.</p>
+ <p>Long-standing pins and needles in the hands from gripping the bars is a different, benign thing. New since the crash is what matters.</p>`},
 
-{when:a=>a.injury!=="fatal" && has(a,"fine"), tag:"First aid",
- title:"You feel fine: what to watch for tonight",
- html:`<p>Adrenaline and shock suppress pain for hours, and several serious injuries are
- quiet at first. Feeling fine at the roadside is normal and is not evidence that you are.</p>
- <p>Over the next 48 hours, get seen urgently for any of: a headache that builds, vomiting,
- confusion or unusual sleepiness, belly pain or a spreading bruise, pain at the tip of a
- shoulder, breathing that gets harder, blood in urine, or new numbness or weakness.</p>
- <p>Ordinary next-day stiffness and bruising is expected. Anything that is worse on day two
- than day one deserves a phone call.</p>
- <p>Get checked within 24 to 72 hours regardless. It protects your health, and a gap in
- treatment is the first thing an insurer points at to argue you were not really hurt.</p>`},
+// 0240-you-feel-fine-what-to-watch.md
+{when:a=>!["fatal"].includes(a.injury) && ["fine"].some(k=>has(a,k)), tag:"First aid", title:"You feel fine: what to watch for tonight",
+ html:`<p>Adrenaline and shock suppress pain for hours, and several serious injuries are quiet at first. Feeling fine at the roadside is normal and is not evidence that you are.</p>
+ <p>Over the next 48 hours, get seen urgently for any of: a headache that builds, vomiting, confusion or unusual sleepiness, belly pain or a spreading bruise, pain at the tip of a shoulder, breathing that gets harder, blood in urine, or new numbness or weakness.</p>
+ <p>Ordinary next-day stiffness and bruising is expected. Anything that is worse on day two than day one deserves a phone call.</p>
+ <p>Get checked within 24 to 72 hours regardless. It protects your health, and a gap in treatment is the first thing an insurer points at to argue you were not really hurt.</p>`},
 
-{when:a=>a.when==="scene" && ["mv","door","ped"].includes(a.type), cls:"urgent", tag:"Right now",
- title:"Do not let the other person leave, and do not settle at the curb",
- html:`<ul class="check">
- <li>Ask for their driver's license, insurance card, and license plate. Photograph all three.</li>
- <li>Photograph the vehicle, including the plate and any damage.</li>
- <li>Do not accept cash, a promise to pay, or "let's keep insurance out of it." You do not yet know what your injuries cost.</li>
- <li>Do not apologize or guess at fault. Describe facts only.</li>
- </ul>`},
+// 0250-do-not-let-the-other-person.md
+{when:a=>["scene"].includes(a.when) && ["mv","door","ped"].includes(a.type), cls:"urgent", tag:"Right now", title:"Do not let the other person leave, and do not settle at the curb",
+ html:`<ul class="check"><li>Ask for their driver's license, insurance card, and license plate. Photograph all three.</li><li>Photograph the vehicle, including the plate and any damage.</li><li>Do not accept cash, a promise to pay, or "let's keep insurance out of it." You do not yet know what your injuries cost.</li><li>Do not apologize or guess at fault. Describe facts only.</li></ul>`},
 
-{when:a=>a.when==="scene", tag:"Right now", title:"Call the police, even for a minor crash",
- html:`<p>A police report is the single most useful document you can have later,
- for insurance and for any claim. Officers sometimes tell cyclists a report is not
- needed. Ask anyway, politely and clearly: "I want a report, and I am injured."</p>
+// 0260-call-the-police-even-for-a.md
+{when:a=>["scene"].includes(a.when), tag:"Right now", title:"Call the police, even for a minor crash",
+ html:`<p>A police report is the single most useful document you can have later, for insurance and for any claim. Officers sometimes tell cyclists a report is not needed. Ask anyway, politely and clearly: "I want a report, and I am injured."</p>
  <p>Get the officer's name, badge number, and the report or complaint number before they leave.</p>`},
 
-{when:a=>a.when==="scene", tag:"Right now", title:"Collect what disappears in ten minutes",
- html:`<ul class="check">
- <li>Names and phone numbers of every witness. People leave fast; a name with no number is worthless.</li>
- <li>Wide photos showing the whole scene, the road, signals, sightlines, and lane markings.</li>
- <li>Close photos of your bike, your helmet, your injuries, and your torn clothing.</li>
- <li>Look up: note any storefront, doorbell, traffic, or bus cameras pointing at the spot. Footage is often overwritten within days.</li>
- <li>Write down the time, weather, and light conditions.</li>
- </ul>`},
+// 0270-collect-what-disappears-in-ten-minutes.md
+{when:a=>["scene"].includes(a.when), tag:"Right now", title:"Collect what disappears in ten minutes",
+ html:`<ul class="check"><li>Names and phone numbers of every witness. People leave fast; a name with no number is worthless.</li><li>Wide photos showing the whole scene, the road, signals, sightlines, and lane markings.</li><li>Close photos of your bike, your helmet, your injuries, and your torn clothing.</li><li>Look up: note any storefront, doorbell, traffic, or bus cameras pointing at the spot. Footage is often overwritten within days.</li><li>Write down the time, weather, and light conditions.</li></ul>`},
 
-// ---------- medical ----------
-{when:a=>a.injury==="severe", cls:"urgent", tag:"Medical", title:"Emergency room, by ambulance",
- html:`<p>Call 911. Do not drive yourself and do not have a friend drive you if there
- is any chance of a head, neck, spine, or internal injury. The ambulance record is also
- evidence that you were hurt at the scene.</p>`},
+// 0280-emergency-room-by-ambulance.md
+{when:a=>["severe"].includes(a.injury), cls:"urgent", tag:"Medical", title:"Emergency room, by ambulance",
+ html:`<p>Call 911. Do not drive yourself and do not have a friend drive you if there is any chance of a head, neck, spine, or internal injury. The ambulance record is also evidence that you were hurt at the scene.</p>`},
 
-{when:a=>a.injury==="head", cls:"urgent", tag:"Medical", title:"Get your head checked today",
- html:`<p>Any impact to the head deserves a same-day evaluation, even with a helmet on
- and even if you never lost consciousness.</p>
- <p><strong>Go to an emergency room now</strong> if you have: worsening headache, repeated
- vomiting, confusion or trouble finding words, unequal pupils, seizure, clear fluid from
- the nose or ear, weakness or numbness, or you cannot remember the crash. Anyone on a
- blood thinner should be seen regardless of how they feel.</p>
+// 0290-get-your-head-checked-today.md
+{when:a=>["head"].includes(a.injury), cls:"urgent", tag:"Medical", title:"Get your head checked today",
+ html:`<p>Any impact to the head deserves a same-day evaluation, even with a helmet on and even if you never lost consciousness.</p>
+ <p><strong>Go to an emergency room now</strong> if you have: worsening headache, repeated vomiting, confusion or trouble finding words, unequal pupils, seizure, clear fluid from the nose or ear, weakness or numbness, or you cannot remember the crash. Anyone on a blood thinner should be seen regardless of how they feel.</p>
  <p>Do not ride home. Have someone stay with you tonight.</p>`},
 
-{when:a=>["moderate","minor"].includes(a.injury), tag:"Medical",
- title:"See a doctor within 24 to 72 hours anyway",
- html:`<p>Soft-tissue injuries, concussions, and cracked ribs routinely show up a day or
- two later. Two reasons to go early: your health, and the gap in treatment that an
- insurer will later use to argue you were not really hurt.</p>
- <p>Tell the provider it was a bicycle crash and describe every sore spot, not just
- the worst one. Untreated complaints do not exist on paper.</p>`},
+// 0300-see-a-doctor-within-24-to.md
+{when:a=>["moderate","minor"].includes(a.injury), tag:"Medical", title:"See a doctor within 24 to 72 hours anyway",
+ html:`<p>Soft-tissue injuries, concussions, and cracked ribs routinely show up a day or two later. Two reasons to go early: your health, and the gap in treatment that an insurer will later use to argue you were not really hurt.</p>
+ <p>Tell the provider it was a bicycle crash and describe every sore spot, not just the worst one. Untreated complaints do not exist on paper.</p>`},
 
-{when:a=>["head","moderate","minor"].includes(a.injury), tag:"Medical", title:"Road rash and your gear",
- html:`<p>Wash road rash with soap and water, get the grit out, keep it moist with
- ointment and a non-stick dressing rather than letting it scab dry. Watch for spreading
- redness, pus, or fever, and get a tetanus booster if yours is more than five years old.</p>
- <p>Replace any helmet that took an impact, even if it looks fine. Do not repair or wash
- the bike, the helmet, or the clothes yet: they are evidence. Photograph everything first
- and put it in a bag.</p>`},
+// 0310-your-helmet-and-gear-are-evidence.md
+{when:a=>["head","moderate","minor"].includes(a.injury), tag:"Medical", title:"Your helmet and gear are evidence",
+ html:`<p>Replace any helmet that took an impact, even if it looks fine. Do not repair or wash the bike, the helmet, or the clothes yet: they are evidence. Photograph everything first and put it in a bag.</p>
+ <p>Get a tetanus booster if yours is more than five years old.</p>`},
 
-{when:a=>a.injury!=="fatal", tag:"Medical", title:"Start a symptom log today",
- html:`<p>Once a day, in a notes app: pain level, what you could not do, sleep, mood,
- missed work, appointments. It takes a minute and it is far more persuasive months
- later than trying to remember.</p>`},
+// 0320-start-a-symptom-log-today.md
+{when:a=>!["fatal"].includes(a.injury), tag:"Medical", title:"Start a symptom log today",
+ html:`<p>Once a day, in a notes app: pain level, what you could not do, sleep, mood, missed work, appointments. It takes a minute and it is far more persuasive months later than trying to remember.</p>`},
 
-// ---------- reporting ----------
-{when:a=>["NY","NYC"].includes(a.state) && a.type!=="solo", cls:"deadline", tag:"Reporting", title:"New York: file form MV-104 within 10 days",
- html:`<p>New York requires a written report to the DMV within 10 days of a crash
- involving injury, death, or more than $1,000 of property damage. A bicycle crash with
- a motor vehicle counts, and your bike and gear count toward that damage figure. The
- form is <strong>MV-104</strong> (the driver's is MV-104A), available at
- <a href="https://dmv.ny.gov">dmv.ny.gov</a>. Keep a copy of what you send.</p>`},
+// 0330-new-york-file-form-mv-104.md
+{when:a=>["NY","NYC"].includes(a.state) && !["solo"].includes(a.type), cls:"deadline", tag:"Reporting", title:"New York: file form MV-104 within 10 days",
+ html:`<p>New York requires a written report to the DMV within 10 days of a crash involving injury, death, or more than $1,000 of property damage. A bicycle crash with a motor vehicle counts, and your bike and gear count toward that damage figure. The form is <strong>MV-104</strong> (the driver's is MV-104A), available at <a href="https://dmv.ny.gov">dmv.ny.gov</a>. Keep a copy of what you send.</p>`},
 
-{when:a=>a.state==="NYC", tag:"Reporting", title:"New York City: get the collision report and use 311",
- html:`<p>NYPD collision reports can be requested online through the NYPD Collision Report
- Retrieval System, generally a few days after the crash. Search "NYPD collision report" on
- <a href="https://nyc.gov">nyc.gov</a>. You will need the date, location, and report number.</p>
- <p>Report the street condition, signal, or dangerous intersection to <strong>311</strong>
- as well. That creates a dated public record of the hazard.</p>`},
+// 0340-new-york-city-get-the-collision.md
+{when:a=>["NYC"].includes(a.state), tag:"Reporting", title:"New York City: get the collision report and use 311",
+ html:`<p>NYPD collision reports can be requested online through the NYPD Collision Report Retrieval System, generally a few days after the crash. Search "NYPD collision report" on <a href="https://nyc.gov">nyc.gov</a>. You will need the date, location, and report number.</p>
+ <p>Report the street condition, signal, or dangerous intersection to <strong>311</strong> as well. That creates a dated public record of the hazard.</p>`},
 
-{when:a=>a.state==="NJ" && a.type!=="solo", cls:"deadline", tag:"Reporting", title:"New Jersey: report to police, and file within 10 days if they did not investigate",
- html:`<p>New Jersey requires crashes involving injury, death, or apparent property damage
- over $500 to be reported to police immediately. If no officer investigated at the scene,
- you must file a written report with the NJ Division of State Police within 10 days.
- Look for the crash report form at <a href="https://nj.gov/njsp">nj.gov/njsp</a>.</p>
- <p>You can request the police report from the responding department, usually after about
- five business days, for a small fee.</p>`},
+// 0350-new-jersey-report-to-police-and.md
+{when:a=>["NJ"].includes(a.state) && !["solo"].includes(a.type), cls:"deadline", tag:"Reporting", title:"New Jersey: report to police, and file within 10 days if they did not investigate",
+ html:`<p>New Jersey requires crashes involving injury, death, or apparent property damage over $500 to be reported to police immediately. If no officer investigated at the scene, you must file a written report with the NJ Division of State Police within 10 days. Look for the crash report form at <a href="https://nj.gov/njsp">nj.gov/njsp</a>.</p>
+ <p>You can request the police report from the responding department, usually after about five business days, for a small fee.</p>`},
 
-{when:a=>a.state==="CT" && a.type!=="solo", cls:"deadline", tag:"Reporting", title:"Connecticut: make sure a report exists",
- html:`<p>Connecticut requires reporting crashes involving injury, death, or property damage
- over $1,000. If police responded, request the report from that department or through the
- state's crash-report portal. If nobody responded, go to the local police department or the
- State Police troop that covers the town and file a report in person, as soon as you can.</p>`},
+// 0360-connecticut-make-sure-a-report-exists.md
+{when:a=>["CT"].includes(a.state) && !["solo"].includes(a.type), cls:"deadline", tag:"Reporting", title:"Connecticut: make sure a report exists",
+ html:`<p>Connecticut requires reporting crashes involving injury, death, or property damage over $1,000. If police responded, request the report from that department or through the state's crash-report portal. If nobody responded, go to the local police department or the State Police troop that covers the town and file a report in person, as soon as you can.</p>`},
 
-{when:a=>a.police==="no" && a.when!=="scene", cls:"deadline", tag:"Reporting", title:"No report yet: file one now",
- html:`<p>The longer you wait, the more an insurer will argue the crash did not happen the
- way you say. Go to the police department covering the location where the crash happened,
- in person, and ask to file a late report. Bring your photos, your medical paperwork, and
- any witness contacts.</p>`},
+// 0370-no-report-yet-file-one-now.md
+{when:a=>["no"].includes(a.police) && !["scene"].includes(a.when), cls:"deadline", tag:"Reporting", title:"No report yet: file one now",
+ html:`<p>The longer you wait, the more an insurer will argue the crash did not happen the way you say. Go to the police department covering the location where the crash happened, in person, and ask to file a late report. Bring your photos, your medical paperwork, and any witness contacts.</p>`},
 
-{when:a=>a.type==="hitrun", cls:"urgent", tag:"Reporting", title:"Hit and run: report it immediately",
- html:`<p>Call 911 now if you have not. Speed matters here, both for catching the driver and
- for your own insurance claim, which usually requires prompt reporting.</p>
- <ul class="check">
- <li>Write down anything you remember about the vehicle now: color, make, body style, partial plate, direction, damage, the driver.</li>
- <li>Canvass for cameras yourself in the next day or two. Ask businesses and residents to save footage before it overwrites, which can be as little as 72 hours.</li>
- <li>Ask police for the report number and follow up on the investigation in writing.</li>
- </ul>`},
+// 0380-hit-and-run-report-it-immediately.md
+{when:a=>["hitrun"].includes(a.type), cls:"urgent", tag:"Reporting", title:"Hit and run: report it immediately",
+ html:`<p>Call 911 now if you have not. Speed matters here, both for catching the driver and for your own insurance claim, which usually requires prompt reporting.</p>
+ <ul class="check"><li>Write down anything you remember about the vehicle now: color, make, body style, partial plate, direction, damage, the driver.</li><li>Canvass for cameras yourself in the next day or two. Ask businesses and residents to save footage before it overwrites, which can be as little as 72 hours.</li><li>Ask police for the report number and follow up on the investigation in writing.</li></ul>`},
 
-{when:a=>a.type==="road", tag:"Reporting", title:"Report the road defect in writing, and date it",
- html:`<p>Photograph the pothole, grate, or plate with something for scale, from several
- angles, and note the exact location including the nearest address or intersection.</p>
- <p>Report it to the city or state agency responsible for that road, in a way that creates
- a record: 311 in New York City, the municipal public works department elsewhere, or the
- state DOT for a state highway. Save the confirmation number.</p>
- <p>Claims against a government for road conditions are unusually hard and unusually fast
- to expire. See the deadline section below and talk to a lawyer early.</p>`},
+// 0390-report-the-road-defect-in-writing.md
+{when:a=>["road"].includes(a.type), tag:"Reporting", title:"Report the road defect in writing, and date it",
+ html:`<p>Photograph the pothole, grate, or plate with something for scale, from several angles, and note the exact location including the nearest address or intersection.</p>
+ <p>Report it to the city or state agency responsible for that road, in a way that creates a record: 311 in New York City, the municipal public works department elsewhere, or the state DOT for a state highway. Save the confirmation number.</p>
+ <p>Claims against a government for road conditions are unusually hard and unusually fast to expire. See the deadline section below and talk to a lawyer early.</p>`},
 
-// ---------- insurance ----------
-{when:a=>["NY","NYC"].includes(a.state) && ["mv","door","hitrun"].includes(a.type), cls:"deadline", tag:"Insurance",
- title:"New York no-fault: you have 30 days to apply",
- html:`<p>New York is a no-fault state, and a cyclist struck by a motor vehicle is generally
- covered by <em>that vehicle's</em> no-fault insurance, no matter who was at fault. It pays
- medical bills and a portion of lost wages.</p>
- <p>You must file the application, form <strong>NF-2</strong>, with the vehicle's insurer
- <strong>within 30 days of the crash</strong>. This is the deadline cyclists miss most
- often. Ask the insurer for the form the moment you have the policy number, and send it
- with proof of delivery.</p>
- <p>If the driver is unknown or uninsured, the equivalent route is MVAIC, the Motor Vehicle
- Accident Indemnification Corporation, which has its own short notice deadline. Contact them
- right away and ask what they need and by when.</p>`},
+// 0400-new-york-no-fault-you-have.md
+{when:a=>["NY","NYC"].includes(a.state) && ["mv","door","hitrun"].includes(a.type), cls:"deadline", tag:"Insurance", title:"New York no-fault: you have 30 days to apply",
+ html:`<p>New York is a no-fault state, and a cyclist struck by a motor vehicle is generally covered by <em>that vehicle's</em> no-fault insurance, no matter who was at fault. It pays medical bills and a portion of lost wages.</p>
+ <p>You must file the application, form <strong>NF-2</strong>, with the vehicle's insurer <strong>within 30 days of the crash</strong>. This is the deadline cyclists miss most often. Ask the insurer for the form the moment you have the policy number, and send it with proof of delivery.</p>
+ <p>If the driver is unknown or uninsured, the equivalent route is MVAIC, the Motor Vehicle Accident Indemnification Corporation, which has its own short notice deadline. Contact them right away and ask what they need and by when.</p>`},
 
-{when:a=>a.state==="NJ" && ["mv","door","hitrun"].includes(a.type), cls:"deadline", tag:"Insurance",
- title:"New Jersey PIP: notify an insurer promptly",
- html:`<p>New Jersey personal injury protection can cover a cyclist hit by a motor vehicle.
- Which policy pays depends on the rules about your own auto insurance and your household's,
- so do not assume you have nothing to claim just because you were on a bike.</p>
- <p>Notify the relevant insurer promptly and ask for the PIP application. Many treatments
- need pre-authorization, so getting the claim open early protects your bills.</p>
- <p>If the driver is unknown or uninsured, ask about the Unsatisfied Claim and Judgment
- Fund, which has a short notice period, on the order of 90 days.</p>`},
+// 0410-new-jersey-pip-notify-an-insurer.md
+{when:a=>["NJ"].includes(a.state) && ["mv","door","hitrun"].includes(a.type), cls:"deadline", tag:"Insurance", title:"New Jersey PIP: notify an insurer promptly",
+ html:`<p>New Jersey personal injury protection can cover a cyclist hit by a motor vehicle. Which policy pays depends on the rules about your own auto insurance and your household's, so do not assume you have nothing to claim just because you were on a bike.</p>
+ <p>Notify the relevant insurer promptly and ask for the PIP application. Many treatments need pre-authorization, so getting the claim open early protects your bills.</p>
+ <p>If the driver is unknown or uninsured, ask about the Unsatisfied Claim and Judgment Fund, which has a short notice period, on the order of 90 days.</p>`},
 
-{when:a=>a.state==="CT" && ["mv","door","hitrun"].includes(a.type), tag:"Insurance",
- title:"Connecticut: fault-based, and check your own policy",
- html:`<p>Connecticut is not a no-fault state, so medical bills generally go through your
- health insurance first, with a claim against the at-fault driver's liability coverage for
- the rest.</p>
- <p>Check your own auto policy even though you were cycling: medical payments coverage and
- uninsured/underinsured motorist coverage often extend to you as a pedestrian or cyclist,
- and that is the main source of recovery in a hit-and-run. Notify your own insurer promptly,
- since these coverages have their own notice requirements.</p>`},
+// 0420-connecticut-fault-based-and-check-your.md
+{when:a=>["CT"].includes(a.state) && ["mv","door","hitrun"].includes(a.type), tag:"Insurance", title:"Connecticut: fault-based, and check your own policy",
+ html:`<p>Connecticut is not a no-fault state, so medical bills generally go through your health insurance first, with a claim against the at-fault driver's liability coverage for the rest.</p>
+ <p>Check your own auto policy even though you were cycling: medical payments coverage and uninsured/underinsured motorist coverage often extend to you as a pedestrian or cyclist, and that is the main source of recovery in a hit-and-run. Notify your own insurer promptly, since these coverages have their own notice requirements.</p>`},
 
-{when:a=>a.type!=="solo", tag:"Insurance", title:"Talking to the other side's insurer",
+// 0430-talking-to-the-other-side-s.md
+{when:a=>!["solo"].includes(a.type), tag:"Insurance", title:"Talking to the other side's insurer",
  html:`<p>An adjuster will likely call within days, friendly and quick. Before you engage:</p>
- <ul class="check">
- <li>Give basic facts only: who, when, where. Nothing about fault or about how you feel.</li>
- <li>Do not give a recorded statement, and do not sign a medical authorization, until you have talked to a lawyer.</li>
- <li>Do not accept an early settlement. Once signed, it is final, including for injuries that show up later.</li>
- <li>Keep every offer, letter, and claim number. Follow up phone calls with a short email summarizing what was said.</li>
- <li>Stay off social media about the crash and your activities.</li>
- </ul>`},
+ <ul class="check"><li>Give basic facts only: who, when, where. Nothing about fault or about how you feel.</li><li>Do not give a recorded statement, and do not sign a medical authorization, until you have talked to a lawyer.</li><li>Do not accept an early settlement. Once signed, it is final, including for injuries that show up later.</li><li>Keep every offer, letter, and claim number. Follow up phone calls with a short email summarizing what was said.</li><li>Stay off social media about the crash and your activities.</li></ul>`},
 
-{when:a=>a.injury!=="fatal", tag:"Insurance", title:"Your own coverage for the bike and gear",
- html:`<p>Homeowner's or renter's insurance often covers a damaged bicycle, subject to the
- deductible. Get a written repair estimate or replacement quote from a shop, and hold on to
- the original purchase receipts if you have them. Photograph the damage before any repair.</p>
- <p>Health insurance covers treatment now, and may later assert a lien against any
- settlement. That is normal. Keep the correspondence.</p>`},
+// 0440-your-own-coverage-for-the-bike.md
+{when:a=>!["fatal"].includes(a.injury), tag:"Insurance", title:"Your own coverage for the bike and gear",
+ html:`<p>Homeowner's or renter's insurance often covers a damaged bicycle, subject to the deductible. Get a written repair estimate or replacement quote from a shop, and hold on to the original purchase receipts if you have them. Photograph the damage before any repair.</p>
+ <p>Health insurance covers treatment now, and may later assert a lien against any settlement. That is normal. Keep the correspondence.</p>`},
 
-// ---------- legal ----------
-{when:a=>["NY","NYC"].includes(a.state) && a.injury!=="fatal", cls:"deadline", tag:"Deadlines",
- title:"New York: three years, or 90 days against a government",
- html:`<p>The general deadline to sue for personal injury in New York is
- <strong>three years</strong> from the crash.</p>
- <p>That drops dramatically if a government is involved. Claims against a city, a county,
- a public authority such as the MTA, or the State typically require a formal
- <strong>notice of claim within 90 days</strong>, with the lawsuit itself due about a year
- and 90 days later. Miss the 90 days and the claim is usually gone.</p>
- <p>If a city bus, a sanitation truck, a police vehicle, a pothole, or any public agency is
- part of your story, treat 90 days as your real deadline and call a lawyer this week.</p>`},
+// 0450-new-york-three-years-or-90.md
+{when:a=>["NY","NYC"].includes(a.state) && !["fatal"].includes(a.injury), cls:"deadline", tag:"Deadlines", title:"New York: three years, or 90 days against a government",
+ html:`<p>The general deadline to sue for personal injury in New York is <strong>three years</strong> from the crash.</p>
+ <p>That drops dramatically if a government is involved. Claims against a city, a county, a public authority such as the MTA, or the State typically require a formal <strong>notice of claim within 90 days</strong>, with the lawsuit itself due about a year and 90 days later. Miss the 90 days and the claim is usually gone.</p>
+ <p>If a city bus, a sanitation truck, a police vehicle, a pothole, or any public agency is part of your story, treat 90 days as your real deadline and call a lawyer this week.</p>`},
 
-{when:a=>a.state==="NJ" && a.injury!=="fatal", cls:"deadline", tag:"Deadlines",
- title:"New Jersey: two years, or 90 days against a public entity",
- html:`<p>The general deadline to sue for personal injury in New Jersey is
- <strong>two years</strong> from the crash.</p>
- <p>Under the New Jersey Tort Claims Act, a claim against a public entity or employee
- requires written notice <strong>within 90 days</strong>. That covers municipalities,
- counties, the state, and many authorities.</p>`},
+// 0460-new-jersey-two-years-or-90.md
+{when:a=>["NJ"].includes(a.state) && !["fatal"].includes(a.injury), cls:"deadline", tag:"Deadlines", title:"New Jersey: two years, or 90 days against a public entity",
+ html:`<p>The general deadline to sue for personal injury in New Jersey is <strong>two years</strong> from the crash.</p>
+ <p>Under the New Jersey Tort Claims Act, a claim against a public entity or employee requires written notice <strong>within 90 days</strong>. That covers municipalities, counties, the state, and many authorities.</p>`},
 
-{when:a=>a.state==="CT" && a.injury!=="fatal", cls:"deadline", tag:"Deadlines",
- title:"Connecticut: two years, and 90 days for a road defect",
- html:`<p>The general deadline to sue for personal injury in Connecticut is
- <strong>two years</strong> from the crash.</p>
- <p>If your crash was caused by the condition of the road itself, Connecticut's highway
- defect statutes require written notice to the town or the state commissioner
- <strong>within 90 days</strong>, and courts apply the content requirements of that notice
- strictly. This is a situation to put in a lawyer's hands immediately, not to draft yourself.</p>`},
+// 0470-connecticut-two-years-and-90-days.md
+{when:a=>["CT"].includes(a.state) && !["fatal"].includes(a.injury), cls:"deadline", tag:"Deadlines", title:"Connecticut: two years, and 90 days for a road defect",
+ html:`<p>The general deadline to sue for personal injury in Connecticut is <strong>two years</strong> from the crash.</p>
+ <p>If your crash was caused by the condition of the road itself, Connecticut's highway defect statutes require written notice to the town or the state commissioner <strong>within 90 days</strong>, and courts apply the content requirements of that notice strictly. This is a situation to put in a lawyer's hands immediately, not to draft yourself.</p>`},
 
-{when:a=>a.type!=="solo" && !["minor","fatal"].includes(a.injury), tag:"Legal", title:"Talk to a lawyer, early and for free",
- html:`<p>Personal injury consultations are free and these lawyers work on contingency, so
- an early conversation costs you nothing. Early matters: evidence disappears, camera footage
- overwrites, and the short government deadlines above run whether or not you knew about them.</p>
- <p>Look for someone who specifically handles bicycle cases. State and county bar
- associations run lawyer referral services, and local cycling advocacy organizations keep
- lists. Ask how many cyclist cases they have handled and who will actually work on yours.</p>`},
+// 0480-talk-to-a-lawyer-early-and.md
+{when:a=>!["solo"].includes(a.type) && !["minor","fatal"].includes(a.injury), tag:"Legal", title:"Talk to a lawyer, early and for free",
+ html:`<p>Personal injury consultations are free and these lawyers work on contingency, so an early conversation costs you nothing. Early matters: evidence disappears, camera footage overwrites, and the short government deadlines above run whether or not you knew about them.</p>
+ <p>Look for someone who specifically handles bicycle cases. State and county bar associations run lawyer referral services, and local cycling advocacy organizations keep lists. Ask how many cyclist cases they have handled and who will actually work on yours.</p>`},
 
-{when:a=>a.type==="solo", tag:"Legal", title:"A solo crash may still be someone's fault",
- html:`<p>If a road defect, construction plate, debris in a bike lane, a badly maintained
- path, a defective bike component, or a shop's faulty repair put you down, there may still
- be a claim. Photograph the cause before it is fixed, report it in writing, and keep the
- parts. The government deadlines above apply here too.</p>`},
+// 0490-a-solo-crash-may-still-be.md
+{when:a=>["solo"].includes(a.type), tag:"Legal", title:"A solo crash may still be someone's fault",
+ html:`<p>If a road defect, construction plate, debris in a bike lane, a badly maintained path, a defective bike component, or a shop's faulty repair put you down, there may still be a claim. Photograph the cause before it is fixed, report it in writing, and keep the parts. The government deadlines above apply here too.</p>`},
 
-// ---------- self-care and support ----------
-{when:a=>a.injury!=="fatal" && a.injury!=="minor", tag:"Support", title:"Free support from people who have been through it",
- html:`<p>Families for Safe Streets runs peer mentoring and monthly support groups for
- people seriously injured in traffic crashes and their caregivers, free, anywhere in the
- US, plus a guide to dealing with police, insurers, and prosecutors.
- <strong>(844) 377-7337</strong> &middot;
- <a href="https://www.familiesforsafestreets.org/national-resource-guide">Post-Crash Resource Guide</a>.</p>
- <p>The <a href="https://crashsupportnetwork.com/crash-resources/">Crash Support Network</a>
- is an online community of crash survivors.</p>`},
+// 0500-free-support-from-people-who-have.md
+{when:a=>!["fatal","minor"].includes(a.injury), tag:"Support", title:"Free support from people who have been through it",
+ html:`<p>Families for Safe Streets runs peer mentoring and monthly support groups for people seriously injured in traffic crashes and their caregivers, free, anywhere in the US, plus a guide to dealing with police, insurers, and prosecutors. <strong>(844) 377-7337</strong> · <a href="https://www.familiesforsafestreets.org/national-resource-guide">Post-Crash Resource Guide</a>.</p>
+ <p>The <a href="https://crashsupportnetwork.com/crash-resources/">Crash Support Network</a> is an online community of crash survivors.</p>`},
 
-{when:a=>a.injury!=="fatal", tag:"Recovery", title:"The part people skip",
- html:`<p>Crashes rattle people. Trouble sleeping, replaying it, flinching at traffic, anger,
- or dreading the bike is an ordinary response to being hit, not weakness, and it usually
- eases over a few weeks. If it is not easing, or you are avoiding things you need to do,
- talk to a doctor or a therapist. Mention the crash: trauma responses are treatable and
- respond well to early care.</p>
+// 0510-the-part-people-skip.md
+{when:a=>!["fatal"].includes(a.injury), tag:"Recovery", title:"The part people skip",
+ html:`<p>Crashes rattle people. Trouble sleeping, replaying it, flinching at traffic, anger, or dreading the bike is an ordinary response to being hit, not weakness, and it usually eases over a few weeks. If it is not easing, or you are avoiding things you need to do, talk to a doctor or a therapist. Mention the crash: trauma responses are treatable and respond well to early care.</p>
  <p>In crisis, call or text <strong>988</strong>.</p>
- <p>When you ride again, go short, go somewhere quiet, and go with someone. Have a shop
- inspect the frame, fork, and wheels first, especially anything carbon, where damage hides.</p>`},
+ <p>When you ride again, go short, go somewhere quiet, and go with someone. Have a shop inspect the frame, fork, and wheels first, especially anything carbon, where damage hides.</p>`},
 
+// 0520-new-york-support-and-referrals.md
 {when:a=>["NY","NYC"].includes(a.state), tag:"Support", title:"New York support and referrals",
- html:`<ul>
- <li><strong>Families for Safe Streets New York</strong>: free peer mentoring, monthly
- support groups including a Spanish-language one, and a post-crash resource guide.
- <strong>(844) 377-7337</strong>,
- <a href="https://ny.familiesforsafestreets.org/support-services">support services</a>,
- <a href="https://ny.familiesforsafestreets.org/resource-guides">guides in English, Spanish, and Chinese</a>.</li>
- <li><strong>Transportation Alternatives</strong> maintains a list of law firms that
- specifically handle cyclist and pedestrian cases, and will help connect you:
- <a href="https://transalt.org/nyc-bike-resources">transalt.org/nyc-bike-resources</a>.
- We do not endorse particular firms; that list is theirs.</li>
- <li><strong>New York Bicycling Coalition</strong>'s crash guide, written by bike crash
- attorneys: <a href="https://nybc.net/nys-bike-law/in-a-crash-2">nybc.net</a>.</li>
- <li><a href="https://www.bike.nyc">Bike New York</a> for education and community.</li>
- <li><strong>211 New York</strong> for free referrals to medical, mental health, and
- financial assistance near you.</li>
- <li>New York State Bar Association and your county bar run lawyer referral services.</li>
- </ul>`},
+ html:`<ul><li><strong>Families for Safe Streets New York</strong>: free peer mentoring, monthly support groups including a Spanish-language one, and a post-crash resource guide. <strong>(844) 377-7337</strong>, <a href="https://ny.familiesforsafestreets.org/support-services">support services</a>, <a href="https://ny.familiesforsafestreets.org/resource-guides">guides in English, Spanish, and Chinese</a>.</li><li><strong>Transportation Alternatives</strong> maintains a list of law firms that specifically handle cyclist and pedestrian cases, and will help connect you: <a href="https://transalt.org/nyc-bike-resources">transalt.org/nyc-bike-resources</a>. We do not endorse particular firms; that list is theirs.</li><li><strong>New York Bicycling Coalition</strong>'s crash guide, written by bike crash attorneys: <a href="https://nybc.net/nys-bike-law/in-a-crash-2">nybc.net</a>.</li><li><a href="https://www.bike.nyc">Bike New York</a> for education and community.</li><li><strong>211 New York</strong> for free referrals to medical, mental health, and financial assistance near you.</li><li>New York State Bar Association and your county bar run lawyer referral services.</li></ul>`},
 
-{when:a=>a.state==="NJ", tag:"Support", title:"New Jersey support and referrals",
- html:`<ul>
- <li><strong>Families for Safe Streets</strong> supports crash victims anywhere in the US,
- free: peer mentoring, support groups, and a
- <a href="https://www.familiesforsafestreets.org/national-resource-guide">post-crash resource guide</a>.
- <strong>(844) 377-7337</strong>,
- <a href="mailto:info@familiesforsafestreets.org">info@familiesforsafestreets.org</a>.</li>
- <li><a href="https://njbwc.org">New Jersey Bike &amp; Walk Coalition</a> for advocacy and
- local connections.</li>
- <li><strong>NJ 211</strong> for referrals to medical, mental health, and financial help.</li>
- <li>New Jersey State Bar Association lawyer referral service, and your county bar.</li>
- </ul>`},
+// 0530-new-jersey-support-and-referrals.md
+{when:a=>["NJ"].includes(a.state), tag:"Support", title:"New Jersey support and referrals",
+ html:`<ul><li><strong>Families for Safe Streets</strong> supports crash victims anywhere in the US, free: peer mentoring, support groups, and a <a href="https://www.familiesforsafestreets.org/national-resource-guide">post-crash resource guide</a>. <strong>(844) 377-7337</strong>, <a href="mailto:info@familiesforsafestreets.org">info@familiesforsafestreets.org</a>.</li><li><a href="https://njbwc.org">New Jersey Bike &amp; Walk Coalition</a> for advocacy and local connections.</li><li><strong>NJ 211</strong> for referrals to medical, mental health, and financial help.</li><li>New Jersey State Bar Association lawyer referral service, and your county bar.</li></ul>`},
 
-{when:a=>a.state==="CT", tag:"Support", title:"Connecticut support and referrals",
- html:`<ul>
- <li><strong>Families for Safe Streets</strong> supports crash victims anywhere in the US,
- free: peer mentoring, support groups, and a
- <a href="https://www.familiesforsafestreets.org/national-resource-guide">post-crash resource guide</a>.
- <strong>(844) 377-7337</strong>,
- <a href="mailto:info@familiesforsafestreets.org">info@familiesforsafestreets.org</a>.</li>
- <li><a href="https://bikewalkct.org">Bike Walk Connecticut</a> for advocacy and local
- connections.</li>
- <li><strong>211 Connecticut</strong> for referrals to medical, mental health, and
- financial help.</li>
- <li>Connecticut Bar Association lawyer referral service.</li>
- </ul>`},
+// 0540-connecticut-support-and-referrals.md
+{when:a=>["CT"].includes(a.state), tag:"Support", title:"Connecticut support and referrals",
+ html:`<ul><li><strong>Families for Safe Streets</strong> supports crash victims anywhere in the US, free: peer mentoring, support groups, and a <a href="https://www.familiesforsafestreets.org/national-resource-guide">post-crash resource guide</a>. <strong>(844) 377-7337</strong>, <a href="mailto:info@familiesforsafestreets.org">info@familiesforsafestreets.org</a>.</li><li><a href="https://bikewalkct.org">Bike Walk Connecticut</a> for advocacy and local connections.</li><li><strong>211 Connecticut</strong> for referrals to medical, mental health, and financial help.</li><li>Connecticut Bar Association lawyer referral service.</li></ul>`},
 
+// 0550-one-folder-starting-today.md
 {tag:"Records", title:"One folder, starting today",
  html:`<p>Put all of it in one place, physical or digital:</p>
- <ul class="check">
- <li>Police report number and the report once you get it</li>
- <li>Every photo and video, originals, not screenshots</li>
- <li>Witness names and numbers</li>
- <li>Driver and insurance details</li>
- <li>Every medical bill, discharge paper, and prescription receipt</li>
- <li>Repair estimates and receipts for the bike, helmet, gear, and clothing</li>
- <li>Missed work: dates, hours, and a note from your employer</li>
- <li>Your daily symptom log</li>
- <li>Every letter, email, and claim number from any insurer</li>
- </ul>`}
+ <ul class="check"><li>Police report number and the report once you get it</li><li>Every photo and video, originals, not screenshots</li><li>Witness names and numbers</li><li>Driver and insurance details</li><li>Every medical bill, discharge paper, and prescription receipt</li><li>Repair estimates and receipts for the bike, helmet, gear, and clothing</li><li>Missed work: dates, hours, and a note from your employer</li><li>Your daily symptom log</li><li>Every letter, email, and claim number from any insurer</li></ul>`}
+
 ];
 
 var form = document.getElementById("q");

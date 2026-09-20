@@ -33,9 +33,32 @@ it existed.
   actually matters for a cyclist (your own uninsured motorist limit), bike
   documentation, camera footage handling, and a printable wallet card.
 
+## Editing the advice
+
+Every step of advice is its own markdown file in `content/`. Fix a fact by
+editing one small file; you never touch HTML or JavaScript. A step declares who
+sees it in its frontmatter:
+
+```markdown
+---
+title: New York no-fault: you have 30 days to apply
+tag: Insurance
+style: deadline
+when:
+  state: [NY, NYC]
+  type: [mv, door, hitrun]
+---
+```
+
+Then `python3 build.py` regenerates `index.html`, and `node selftest.js`
+checks the rules. Both are stdlib-only; there are no dependencies to install.
+A typo in a condition fails the build with a message naming the file, instead
+of silently hiding that step from everyone. See
+[CONTRIBUTING.md](CONTRIBUTING.md).
+
 ## Running it
 
-Open `index.html`. That's it — no build, no dependencies, no tracking.
+Open `index.html`. No bundler, no dependencies, no tracking.
 
 To serve locally: `python3 -m http.server`. To host it: GitHub Pages from the
 repository root works with no configuration.
@@ -43,12 +66,8 @@ repository root works with no configuration.
 `style.css` is shared by both pages. `index.html#selftest` runs the rule-matching checks; the tab title becomes
 "selftest passed".
 
-## Editing the content
-
-All advice lives in the `STEPS` array near the bottom of `index.html`. See
-[CONTRIBUTING.md](CONTRIBUTING.md) for the shape of a step and the rules for
-changing one. The short version: **factual changes need a source link**, and
-the prose is written for someone with a concussion.
+The short version of the contribution rules: **factual changes need a source
+link**, and the prose is written for someone with a concussion.
 
 ## Accuracy and limits
 

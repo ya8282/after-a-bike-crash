@@ -1,0 +1,11 @@
+name: build
+on: [push, pull_request]
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: index.html matches content/
+        run: python3 build.py --check
+      - name: rule self-tests
+        run: node selftest.js

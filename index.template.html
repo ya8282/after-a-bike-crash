@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>After a Bike Crash</title>
+<meta name="description" content="Next steps after a bicycle crash in New York, New Jersey, or Connecticut.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="emergency">
+  <div class="inner">
+    <strong>If anyone is badly hurt, stop reading and call 911.</strong>
+    Head injury, heavy bleeding, trouble breathing, a limb that looks wrong, or
+    any loss of consciousness means an ambulance, not a bike ride home.
+    In a mental-health crisis, call or text <strong>988</strong>.
+  </div>
+</div>
+
+<div class="wrap">
+<h1>After a bike crash</h1>
+<p class="sub">
+  A checklist for people who were just in a bicycle crash in New York, New Jersey,
+  or Connecticut. Answer a few questions and it will lay out what to do, in order.
+  Nothing here is legal or medical advice, and deadlines below are the general rule,
+  not a promise about your case.
+</p>
+<p class="sub noprint">
+  Not in a crash right now?
+  <a href="prepare.html">What to carry and set up before one</a>.
+</p>
+
+<form id="q" class="noprint">
+
+<fieldset>
+  <legend>Where did it happen?</legend>
+  <div class="opts" data-name="state">
+    <label class="opt"><input type="radio" name="state" value="NY">New York</label>
+    <label class="opt"><input type="radio" name="state" value="NYC">New York City</label>
+    <label class="opt"><input type="radio" name="state" value="NJ">New Jersey</label>
+    <label class="opt"><input type="radio" name="state" value="CT">Connecticut</label>
+  </div>
+</fieldset>
+
+<fieldset>
+  <legend>What happened?</legend>
+  <div class="opts" data-name="type">
+    <label class="opt"><input type="radio" name="type" value="mv">A motor vehicle hit me</label>
+    <label class="opt"><input type="radio" name="type" value="hitrun">A driver hit me and left</label>
+    <label class="opt"><input type="radio" name="type" value="door">I was doored</label>
+    <label class="opt"><input type="radio" name="type" value="road">Pothole, grate, or bad road</label>
+    <label class="opt"><input type="radio" name="type" value="solo">Solo crash or another cyclist</label>
+    <label class="opt"><input type="radio" name="type" value="ped">A pedestrian and I collided</label>
+  </div>
+</fieldset>
+
+<fieldset>
+  <legend>How bad are the injuries?</legend>
+  <div class="opts" data-name="injury">
+    <label class="opt"><input type="radio" name="injury" value="fatal">Someone was killed</label>
+    <label class="opt"><input type="radio" name="injury" value="severe">Serious: ER now</label>
+    <label class="opt"><input type="radio" name="injury" value="head">I hit my head</label>
+    <label class="opt"><input type="radio" name="injury" value="moderate">Hurt but walking</label>
+    <label class="opt"><input type="radio" name="injury" value="minor">Scrapes, feel okay</label>
+  </div>
+</fieldset>
+
+<fieldset>
+  <legend>What are you feeling? <span class="sub" style="font-weight:400">Optional, choose any</span></legend>
+  <div class="opts" data-name="sym">
+    <label class="opt"><input type="checkbox" name="sym" value="head">Headache, dizzy, or foggy</label>
+    <label class="opt"><input type="checkbox" name="sym" value="neck">Neck or back pain</label>
+    <label class="opt"><input type="checkbox" name="sym" value="bleed">Bleeding a lot</label>
+    <label class="opt"><input type="checkbox" name="sym" value="rash">Road rash</label>
+    <label class="opt"><input type="checkbox" name="sym" value="bone">Possible broken bone</label>
+    <label class="opt"><input type="checkbox" name="sym" value="shoulder">Shoulder or collarbone</label>
+    <label class="opt"><input type="checkbox" name="sym" value="wrist">Wrist or hand</label>
+    <label class="opt"><input type="checkbox" name="sym" value="chest">Chest pain or hard to breathe</label>
+    <label class="opt"><input type="checkbox" name="sym" value="abdo">Belly pain</label>
+    <label class="opt"><input type="checkbox" name="sym" value="face">Teeth, face, or eye</label>
+    <label class="opt"><input type="checkbox" name="sym" value="numb">Numbness or tingling</label>
+    <label class="opt"><input type="checkbox" name="sym" value="fine">Nothing yet, I feel okay</label>
+  </div>
+</fieldset>
+
+<fieldset>
+  <legend>Where are you right now?</legend>
+  <div class="opts" data-name="when">
+    <label class="opt"><input type="radio" name="when" value="scene">Still at the scene</label>
+    <label class="opt"><input type="radio" name="when" value="today">Left the scene, same day</label>
+    <label class="opt"><input type="radio" name="when" value="later">Days or weeks later</label>
+  </div>
+</fieldset>
+
+<fieldset>
+  <legend>Did police respond?</legend>
+  <div class="opts" data-name="police">
+    <label class="opt"><input type="radio" name="police" value="yes">Yes, a report was made</label>
+    <label class="opt"><input type="radio" name="police" value="no">No</label>
+    <label class="opt"><input type="radio" name="police" value="unsure">Not sure</label>
+  </div>
+</fieldset>
+
+<p class="hint noprint">
+  Screen wet? Wipe it on something dry, or the phone may not feel your taps.
+  Hands bloody or shaking? Hand the phone to someone and have them read this to you.
+</p>
+
+<div class="actions sticky">
+  <button type="submit" class="wide">Show my next steps</button>
+</div>
+<p class="escape noprint">
+  <button type="button" class="small" id="showall">Screen not working? Show every step</button>
+</p>
+</form>
+
+<div id="result" aria-live="polite"></div>
+
+<div class="danger-zone noprint">
+  <button type="button" class="ghost small" id="reset">Clear my answers and start over</button>
+</div>
+
+<footer>
+  General information only, not legal or medical advice, and no attorney-client
+  relationship. The first aid here is general guidance for the minutes before
+  professional care, not a substitute for it. <strong>This page has not been
+  reviewed by an attorney or a clinician.</strong> When in doubt, call 911. Laws, forms, and deadlines change. Confirm anything that matters
+  with the agency itself or with a lawyer licensed in your state before you rely
+  on it. If you are close to a deadline, talk to a lawyer today rather than
+  reading further.
+</footer>
+</div>
+
+<script>
+// ponytail: plain data + filter. Rules stay readable; no template engine.
+// Each step: {tag, title, html, when(a) -> bool, cls}
+var has = (a,k) => !!a.sym && a.sym.has(k);
+
+/* STEPS: generated by build.py from content/*.md, do not edit here */
+
+var form = document.getElementById("q");
+var out = document.getElementById("result");
+
+form.addEventListener("submit", function(e){
+  e.preventDefault();
+  var a = {sym:new Set()};
+  new FormData(form).forEach((v,k)=>{ if (k==="sym") a.sym.add(v); else a[k]=v; });
+  if (!a.state || !a.type || !a.injury || !a.when || !a.police){
+    out.innerHTML = '<p class="step urgent">Please answer all five questions so the steps match your situation.</p>';
+    out.scrollIntoView({behavior:"smooth"});
+    return;
+  }
+  save(a);
+  render(STEPS.filter(s => !s.when || s.when(a)), "In rough order of urgency. Print or save this page to keep it.");
+});
+
+function render(steps, note){
+  out.innerHTML =
+    '<h2>Your next steps</h2>' +
+    '<p class="sub">' + note + '</p>' +
+    '<div class="actions noprint"><button type="button" id="print">Print or save as PDF</button></div>' +
+    steps.map(s =>
+      '<section class="step ' + (s.cls||'') + '">' +
+      (s.tag ? '<span class="tag">'+s.tag+'</span>' : '') +
+      '<h3>'+s.title+'</h3>' + s.html + '</section>'
+    ).join('');
+  document.getElementById("print").addEventListener("click", ()=>window.print());
+  out.scrollIntoView({behavior:"smooth"});
+}
+
+// Escape hatch: if tapping the options is not working, one tap shows everything.
+document.getElementById("showall").addEventListener("click", function(){
+  render(STEPS, "Everything, for all three states and every situation. Skip what does not apply to you.");
+});
+
+document.getElementById("reset").addEventListener("click", function(){
+  form.reset();
+  out.innerHTML = "";
+  try { localStorage.removeItem(KEY); } catch(e){}
+  window.scrollTo({top:0, behavior:"smooth"});
+});
+
+// ponytail: answers survive a reload, because a damaged phone reloads a lot.
+// Local to this browser, cleared by Start over.
+var KEY = "abc-answers";
+function save(a){
+  try {
+    localStorage.setItem(KEY, JSON.stringify(Object.assign({}, a, {sym:[...a.sym]})));
+  } catch(e){}
+}
+function restore(){
+  try {
+    var a = JSON.parse(localStorage.getItem(KEY) || "null");
+    if (!a) return;
+    form.querySelectorAll("input").forEach(function(i){
+      i.checked = (i.type === "checkbox") ? (a.sym||[]).includes(i.value) : a[i.name] === i.value;
+    });
+  } catch(e){}
+}
+restore();
+
+// ponytail: one runnable check. Open with #selftest.
+if (location.hash === "#selftest"){
+  var t = (c,m)=>{ if(!c) throw new Error("selftest: "+m); };
+  var nyc = {state:"NYC",type:"mv",injury:"head",when:"scene",police:"yes"};
+  var pick = a => STEPS.filter(s=>!s.when||s.when(a)).map(s=>s.title);
+  t(pick(nyc).some(x=>/30 days/.test(x)), "NYC motor vehicle must surface the no-fault 30-day step");
+  t(pick(nyc).some(x=>/90 days/.test(x)), "NYC must surface the municipal 90-day notice");
+  t(!pick({state:"CT",type:"solo",injury:"minor",when:"later",police:"no"})
+     .some(x=>/no-fault/i.test(x)), "CT solo crash must not surface NY no-fault");
+  t(pick({state:"NJ",type:"road",injury:"minor",when:"later",police:"no"})
+     .some(x=>/two years/.test(x)), "NJ must surface its two-year deadline");
+  var fat = {state:"NY",type:"mv",injury:"fatal",when:"later",police:"yes"};
+  t(pick(fat).some(x=>/two years, not three/.test(x)), "fatal NY must use the wrongful-death deadline");
+  t(!pick(fat).some(x=>/three years/.test(x)), "fatal NY must not show the 3-year injury deadline");
+  t(!pick(fat).some(x=>/Road rash|symptom log/i.test(x)), "fatal must not show personal-injury self-care");
+  t(STEPS.filter(s=>!s.when||s.when(fat)).some(s=>/844\) 377-7337/.test(s.html)),
+    "fatal must surface the FSS support line");
+  var sym = k => ({state:"NY",type:"mv",injury:"moderate",when:"scene",police:"yes",sym:new Set(k)});
+  t(pick(sym(["wrist"])).some(x=>/scaphoid/.test(x)), "wrist symptom must surface the scaphoid warning");
+  t(!pick(sym([])).some(x=>/scaphoid/.test(x)), "unselected symptoms must stay hidden");
+  t(pick(sym(["bleed","abdo"])).length > pick(sym(["bleed"])).length,
+    "each selected symptom must add a step");
+  t(pick(sym(["head"])).some(x=>/911/.test(x)) , "symptom answers must still show the 911 red flags");
+  t(!pick({state:"NY",type:"mv",injury:"fatal",when:"later",police:"yes",sym:new Set(["rash"])})
+     .some(x=>/Road rash/.test(x)), "fatal must not show first aid for the reader");
+  document.title = "selftest passed";
+  console.log("selftest passed");
+}
+</script>
+</body>
+</html>
