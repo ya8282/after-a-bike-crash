@@ -27,7 +27,12 @@ looks wrong is genuinely useful even without the fix.
 
 ## Making a change
 
-Content lives in the `STEPS` array near the bottom of `index.html`. Each entry:
+The site is three files: `index.html` (the situation-based next steps),
+`prepare.html` (static, what to do before a crash), and `style.css`, shared by
+both. Design tokens live at the top of the stylesheet; don't add a second copy.
+
+Content for the next-steps page lives in the `STEPS` array near the bottom of
+`index.html`. Each entry:
 
 ```js
 {when: a => a.state === "NJ" && a.type === "door",  // omit to always show
@@ -64,5 +69,6 @@ you can actually source.
   link to bar referral services and advocacy organizations that maintain their
   own vetted lists.
 - Trackers, analytics, ads, or lead-capture forms.
-- Dependencies. It's one HTML file and it should stay one HTML file.
+- Dependencies. No npm, no framework, no build step, no CDN. Plain static files
+  that work opened straight from disk.
 - Anything that makes the page slower to read in an emergency.

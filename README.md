@@ -25,6 +25,14 @@ municipal notice of claim** deadlines in all three states — the trap that ends
 claims against a city, a transit authority, or a pothole before the victim knows
 it existed.
 
+## The pages
+
+- **`index.html`** — the situation-based next steps, for someone who just crashed.
+- **`prepare.html`** — what to carry and set up beforehand: a specific first aid
+  kit list with reasons, phone and Medical ID setup, the insurance coverage that
+  actually matters for a cyclist (your own uninsured motorist limit), bike
+  documentation, camera footage handling, and a printable wallet card.
+
 ## Running it
 
 Open `index.html`. That's it — no build, no dependencies, no tracking.
@@ -32,7 +40,7 @@ Open `index.html`. That's it — no build, no dependencies, no tracking.
 To serve locally: `python3 -m http.server`. To host it: GitHub Pages from the
 repository root works with no configuration.
 
-`index.html#selftest` runs the rule-matching checks; the tab title becomes
+`style.css` is shared by both pages. `index.html#selftest` runs the rule-matching checks; the tab title becomes
 "selftest passed".
 
 ## Editing the content
