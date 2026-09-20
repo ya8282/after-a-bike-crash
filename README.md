@@ -3,13 +3,13 @@
 A single static page that tells someone what to do after a bicycle crash in New
 York, New Jersey, or Connecticut, based on their actual situation.
 
-Answer five questions — state, what happened, how bad the injuries are, how long
-ago, whether police responded — and it renders an ordered checklist: emergency
-care, evidence at the scene, crash reporting, insurance, the deadlines that
+Answer six questions — state, what happened, how bad the injuries are, which
+symptoms you have, how long ago, whether police responded — and it renders an ordered checklist: emergency
+care, symptom-by-symptom first aid, evidence at the scene, crash reporting, insurance, the deadlines that
 quietly kill claims, support organizations, and a records checklist. Printable.
 
-**[Read the disclaimer.](#accuracy-and-limits)** This is not legal advice and it
-has not been reviewed by an attorney.
+**[Read the disclaimer.](#accuracy-and-limits)** This is not legal or medical
+advice, and it has not been reviewed by an attorney or a clinician.
 
 ## Why this exists
 
@@ -52,6 +52,8 @@ deliberately written as "confirm with the agency."
 Known gaps and things to re-verify annually:
 
 - Attorney review of every deadline step, per state. **Open — help wanted.**
+- Clinical review of the first aid steps by a physician, paramedic, or nurse.
+  **Open — help wanted.**
 - NY MV-104 filing window and property-damage threshold
 - NY no-fault NF-2 30-day application deadline; MVAIC notice period
 - NJ State Police reporting threshold and window; UCJF notice period

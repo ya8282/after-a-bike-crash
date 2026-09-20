@@ -136,6 +136,24 @@ footer{margin-top:48px; padding-top:18px; border-top:1px solid var(--line); colo
 </fieldset>
 
 <fieldset>
+  <legend>What are you feeling? <span class="sub" style="font-weight:400">Optional, choose any</span></legend>
+  <div class="opts" data-name="sym">
+    <label class="opt"><input type="checkbox" name="sym" value="head">Headache, dizzy, or foggy</label>
+    <label class="opt"><input type="checkbox" name="sym" value="neck">Neck or back pain</label>
+    <label class="opt"><input type="checkbox" name="sym" value="bleed">Bleeding a lot</label>
+    <label class="opt"><input type="checkbox" name="sym" value="rash">Road rash</label>
+    <label class="opt"><input type="checkbox" name="sym" value="bone">Possible broken bone</label>
+    <label class="opt"><input type="checkbox" name="sym" value="shoulder">Shoulder or collarbone</label>
+    <label class="opt"><input type="checkbox" name="sym" value="wrist">Wrist or hand</label>
+    <label class="opt"><input type="checkbox" name="sym" value="chest">Chest pain or hard to breathe</label>
+    <label class="opt"><input type="checkbox" name="sym" value="abdo">Belly pain</label>
+    <label class="opt"><input type="checkbox" name="sym" value="face">Teeth, face, or eye</label>
+    <label class="opt"><input type="checkbox" name="sym" value="numb">Numbness or tingling</label>
+    <label class="opt"><input type="checkbox" name="sym" value="fine">Nothing yet, I feel okay</label>
+  </div>
+</fieldset>
+
+<fieldset>
   <legend>Where are you right now?</legend>
   <div class="opts" data-name="when">
     <label class="opt"><input type="radio" name="when" value="scene">Still at the scene</label>
@@ -163,8 +181,9 @@ footer{margin-top:48px; padding-top:18px; border-top:1px solid var(--line); colo
 
 <footer>
   General information only, not legal or medical advice, and no attorney-client
-  relationship. <strong>This page has not been reviewed by an attorney in any
-  state.</strong> Laws, forms, and deadlines change. Confirm anything that matters
+  relationship. The first aid here is general guidance for the minutes before
+  professional care, not a substitute for it. <strong>This page has not been
+  reviewed by an attorney or a clinician.</strong> When in doubt, call 911. Laws, forms, and deadlines change. Confirm anything that matters
   with the agency itself or with a lawyer licensed in your state before you rely
   on it. If you are close to a deadline, talk to a lawyer today rather than
   reading further.
@@ -174,6 +193,8 @@ footer{margin-top:48px; padding-top:18px; border-top:1px solid var(--line); colo
 <script>
 // ponytail: plain data + filter. Rules stay readable; no template engine.
 // Each step: {tag, title, html, when(a) -> bool, cls}
+var has = (a,k) => !!a.sym && a.sym.has(k);
+
 var STEPS = [
 
 // ---------- someone was killed ----------
@@ -280,6 +301,183 @@ var STEPS = [
  If your neck or back hurts, or you cannot feel part of your body, do not move: call 911 and wait.</p>
  <p>Do not tell anyone you are fine. Adrenaline hides injuries for hours. Say
  "I need to be checked out."</p>`},
+
+// ---------- first aid, by symptom ----------
+{when:a=>a.injury!=="fatal", cls:"urgent", tag:"First aid", title:"Stop and call 911 if any of these are true",
+ html:`<p>Whatever else is going on, these mean an ambulance, not a car ride and not a
+ wait-and-see:</p>
+ <ul>
+ <li>Not fully awake, confused, or cannot remember the crash</li>
+ <li>Bleeding that does not slow after several minutes of firm pressure</li>
+ <li>Neck or back pain, or numbness, tingling, or weakness anywhere</li>
+ <li>Trouble breathing, or chest pain that worsens when breathing in</li>
+ <li>A limb that looks bent wrong, or bone visible through skin</li>
+ <li>Belly pain, a rigid or swelling abdomen, or pain at the tip of the shoulder</li>
+ <li>Repeated vomiting, a seizure, or clear fluid from the nose or ear</li>
+ <li>Pregnancy, a bleeding disorder, or any blood thinner, after any real impact</li>
+ </ul>
+ <p>Everything below is first aid, not a diagnosis. It buys time until someone qualified
+ looks at you. When you are unsure, assume the worse thing and call.</p>`},
+
+{when:a=>a.injury!=="fatal" && has(a,"neck"), cls:"urgent", tag:"First aid",
+ title:"Neck or back pain: stop moving",
+ html:`<p>Do not get up, do not let anyone help you up, and do not take your helmet off.
+ Call 911 and stay where you are, even if you are in an awkward spot, unless there is an
+ immediate danger like fire or traffic that cannot be blocked.</p>
+ <p>If you must be moved, someone should hold your head in line with your shoulders and
+ move your whole body as one unit, without twisting.</p>
+ <p>Spinal injuries can feel like a stiff neck for the first hour. The cost of waiting for
+ an ambulance is an hour. The cost of standing up is potentially permanent.</p>`},
+
+{when:a=>a.injury!=="fatal" && has(a,"bleed"), cls:"urgent", tag:"First aid",
+ title:"Heavy bleeding: firm, constant pressure",
+ html:`<ul class="check">
+ <li>Press hard directly on the wound with a cloth, a jersey, a glove, anything. Firm and continuous beats gentle and fidgety.</li>
+ <li>Hold it for a full ten minutes without lifting to peek. Lifting restarts the clock.</li>
+ <li>If blood soaks through, add more cloth on top. Do not remove the first layer.</li>
+ <li>Raise the limb above the heart if doing so does not cause pain that suggests a fracture.</li>
+ <li>Do not pull out anything embedded in the wound: glass, metal, a branch. Pad around it and leave it for the hospital.</li>
+ </ul>
+ <p>If bleeding from an arm or leg is spurting or will not slow, and you have a tourniquet
+ or a belt and strap, apply it high and tight above the wound, tighten until the bleeding
+ stops, and note the time. That limb needs an emergency room immediately.</p>
+ <p>Feeling cold, clammy, grey, or suddenly very thirsty is shock. Lie down, stay warm,
+ and call 911.</p>`},
+
+{when:a=>a.injury!=="fatal" && has(a,"chest"), cls:"urgent", tag:"First aid",
+ title:"Chest pain or trouble breathing",
+ html:`<p>Call 911 now if breathing is getting harder, you feel short of breath at rest,
+ your lips or fingertips look blue or grey, or the pain is sharp and stabs with each breath
+ in. A broken rib can puncture a lung, and that can worsen over minutes to hours.</p>
+ <p>If you are breathing comfortably and it hurts only when you press or twist, it is more
+ likely a bruised or cracked rib. There is no strapping or binding: that causes pneumonia.
+ Instead, hug a pillow against your chest when you cough, and cough deliberately every hour
+ even though it hurts, to keep the lung bases open.</p>
+ <p>Go back to a doctor for any new fever, a wet cough, or breathing that gets worse over
+ the next few days.</p>`},
+
+{when:a=>a.injury!=="fatal" && has(a,"abdo"), cls:"urgent", tag:"First aid",
+ title:"Belly pain: this is the one that hides",
+ html:`<p>Handlebars hit the abdomen hard and can injure the spleen, liver, or bowel with
+ almost nothing to see on the outside. Bleeding inside can take hours or occasionally days
+ to declare itself, and people have died going home feeling bruised.</p>
+ <p><strong>Emergency room now</strong> for: pain that is worsening rather than settling,
+ a belly that is rigid, swollen, or tender all over, pain at the tip of the left shoulder,
+ blood in urine, vomit, or stool, or any bruise in the shape of the bars or your seat.</p>
+ <p>If you were hit in the abdomen at speed, get it checked even if it feels manageable.
+ Nothing by mouth on the way, in case a surgeon needs you empty.</p>`},
+
+{when:a=>a.injury!=="fatal" && has(a,"head"), cls:"urgent", tag:"First aid",
+ title:"Headache, dizziness, or feeling foggy",
+ html:`<p>Treat this as a concussion until a clinician says otherwise, helmet or not, loss
+ of consciousness or not. Get seen today.</p>
+ <p><strong>Emergency room immediately</strong> if the headache keeps worsening, you vomit
+ more than once, you are confused or slurring, one pupil is larger, you have a seizure,
+ there is weakness or numbness, or clear fluid drains from the nose or ear. Anyone on a
+ blood thinner goes regardless.</p>
+ <p>Otherwise, for the next 24 to 48 hours:</p>
+ <ul class="check">
+ <li>Have someone stay with you tonight, or check on you. Sleeping is fine, being alone is not.</li>
+ <li>No riding, no driving, no alcohol, no workouts.</li>
+ <li>Screens and noise in short doses. If a symptom flares, stop and rest, then try again later.</li>
+ <li>For pain, acetaminophen (Tylenol) is generally preferred over ibuprofen or aspirin in the first day or two, since those affect bleeding. Confirm with a clinician, especially about your own medications.</li>
+ <li>Light walking from day two onward helps recovery more than a dark room does.</li>
+ </ul>
+ <p>Do not go back to riding in traffic until symptoms are gone at rest and with exertion.
+ A second impact before the first heals is far more dangerous than the first.</p>`},
+
+{when:a=>a.injury!=="fatal" && has(a,"bone"), tag:"First aid",
+ title:"Suspected broken bone",
+ html:`<p>Assume it is broken if there is deformity, grinding, an inability to bear weight
+ or use the limb, or pain directly over the bone rather than the soft tissue.</p>
+ <ul class="check">
+ <li>Do not try to straighten it or push anything back into place.</li>
+ <li>Support it in the position you found it. A rolled jacket, a magazine, or a jersey tied as a sling all work.</li>
+ <li>Rings and watches come off now, before swelling makes that a cutting job.</li>
+ <li>Ice over cloth, 20 minutes at a time, never directly on skin.</li>
+ <li>Bone through skin, or a wound over a suspected fracture, means 911 and a sterile cover. Do not wash it out.</li>
+ <li>If fingers or toes beyond the injury are white, blue, cold, or numb, that is urgent: 911.</li>
+ </ul>`},
+
+{when:a=>a.injury!=="fatal" && has(a,"shoulder"), tag:"First aid",
+ title:"Shoulder or collarbone",
+ html:`<p>The collarbone is the classic cycling fracture: you land on the shoulder, and the
+ bone takes it. A visible bump or step in the bone, or pain that spikes when you lift the
+ arm, points that way. A separated AC joint feels similar.</p>
+ <p>Support the arm in a sling with the elbow bent at about 90 degrees, so the weight comes
+ off the shoulder, and ice over cloth. Get an x-ray; most collarbone fractures heal without
+ surgery, but which ones do depends on the pattern, and that decision is time-sensitive.</p>
+ <p>If the arm is numb, cold, or weak, or the skin over the bone is tented and pale, go to
+ an emergency room now rather than urgent care.</p>`},
+
+{when:a=>a.injury!=="fatal" && has(a,"wrist"), tag:"First aid",
+ title:"Wrist or hand: ask specifically about the scaphoid",
+ html:`<p>Landing on an outstretched hand commonly breaks the scaphoid, a small wrist bone.
+ It matters because <strong>the first x-ray is often normal</strong>, people are told they
+ sprained it, and the bone then fails to heal and causes lasting arthritis.</p>
+ <p>The tell is tenderness in the anatomical snuffbox, the hollow at the base of the thumb
+ when you stick the thumb out. If pressing there hurts, say the word "scaphoid" to the
+ clinician and ask about a splint and a repeat x-ray or scan in 10 to 14 days even if the
+ first film is clean.</p>
+ <p>Meanwhile: splint the wrist, rings off, ice over cloth, elevate above the heart.</p>`},
+
+{when:a=>a.injury!=="fatal" && has(a,"rash"), tag:"First aid",
+ title:"Road rash: get the grit out, keep it moist",
+ html:`<p>This is a burn, not a scrape, and it scars like one if it is treated casually or
+ left with debris in it.</p>
+ <ul class="check">
+ <li>Wash your hands, then rinse the wound under cool running water for several minutes. Volume does the work.</li>
+ <li>Clean around it with mild soap. Get every piece of grit, gravel, and thread out, with tweezers cleaned in alcohol if needed. Anything left behind tattoos permanently and invites infection.</li>
+ <li>Do not use hydrogen peroxide, iodine, or alcohol in the wound. They damage healing tissue.</li>
+ <li>Apply a thin layer of plain petroleum jelly or antibiotic ointment, then a non-stick dressing.</li>
+ <li><strong>Keep it moist and covered.</strong> Change the dressing daily. A scab is slower and scars worse than a wound kept moist.</li>
+ <li>Photograph it before you cover it, and again every few days.</li>
+ </ul>
+ <p>Get medical help for: grit you cannot remove, a wound deeper than the top layer or wider
+ than your palm, anything over a joint, exposed fat or muscle, or any wound that needs
+ stitches, which generally means within a few hours.</p>
+ <p>Get a tetanus booster if yours is more than five years old. Watch for spreading redness,
+ increasing pain after day two, pus, red streaks, or fever, and get seen if any appear.</p>`},
+
+{when:a=>a.injury!=="fatal" && has(a,"face"), tag:"First aid",
+ title:"Teeth, face, or eye",
+ html:`<p><strong>A knocked-out adult tooth is a one-hour emergency.</strong> Pick it up by
+ the crown, never the root. If it is dirty, rinse briefly in milk or saline, not water, and
+ do not scrub it. Put it straight back in the socket and bite gently on a cloth. If you
+ cannot, keep it in milk, or in your own saliva against the inside of your cheek if you are
+ alert. Get to a dentist or emergency room immediately. Time in the socket is what decides
+ whether the tooth survives.</p>
+ <p>Chipped or loosened teeth also need a dentist promptly. Save any fragments in milk.</p>
+ <p>For the face: pressure for bleeding, ice over cloth for swelling. A nosebleed means
+ leaning forward and pinching the soft part for ten minutes. Numbness in the cheek or lip,
+ double vision, a change in your bite, or an eye socket that feels different means an
+ emergency room.</p>
+ <p>For the eye: do not rub it and do not remove anything stuck in it. Cover it with
+ something rigid rather than a pad if it is punctured, cover both eyes if you can, and go.
+ Vision loss, flashes, floaters, or blood in the coloured part are all emergencies.</p>`},
+
+{when:a=>a.injury!=="fatal" && has(a,"numb"), cls:"urgent", tag:"First aid",
+ title:"Numbness, tingling, or weakness",
+ html:`<p>New numbness or weakness after a crash is a call-911 symptom, not a
+ wait-until-morning symptom, because it can mean a spinal cord or nerve injury. That is
+ especially true if it affects both sides, a whole limb, or anything below the waist, or if
+ you have neck or back pain with it.</p>
+ <p>Do not move around while waiting. Note exactly which fingers, toes, or areas are
+ affected, and whether it is changing. That detail genuinely helps whoever sees you.</p>
+ <p>Long-standing pins and needles in the hands from gripping the bars is a different, benign
+ thing. New since the crash is what matters.</p>`},
+
+{when:a=>a.injury!=="fatal" && has(a,"fine"), tag:"First aid",
+ title:"You feel fine: what to watch for tonight",
+ html:`<p>Adrenaline and shock suppress pain for hours, and several serious injuries are
+ quiet at first. Feeling fine at the roadside is normal and is not evidence that you are.</p>
+ <p>Over the next 48 hours, get seen urgently for any of: a headache that builds, vomiting,
+ confusion or unusual sleepiness, belly pain or a spreading bruise, pain at the tip of a
+ shoulder, breathing that gets harder, blood in urine, or new numbness or weakness.</p>
+ <p>Ordinary next-day stiffness and bruising is expected. Anything that is worse on day two
+ than day one deserves a phone call.</p>
+ <p>Get checked within 24 to 72 hours regardless. It protects your health, and a gap in
+ treatment is the first thing an insurer points at to argue you were not really hurt.</p>`},
 
 {when:a=>a.when==="scene" && ["mv","door","ped"].includes(a.type), cls:"urgent", tag:"Right now",
  title:"Do not let the other person leave, and do not settle at the curb",
@@ -574,8 +772,8 @@ var out = document.getElementById("result");
 
 form.addEventListener("submit", function(e){
   e.preventDefault();
-  var a = {};
-  new FormData(form).forEach((v,k)=>{ a[k]=v; });
+  var a = {sym:new Set()};
+  new FormData(form).forEach((v,k)=>{ if (k==="sym") a.sym.add(v); else a[k]=v; });
   if (!a.state || !a.type || !a.injury || !a.when || !a.police){
     out.innerHTML = '<p class="step urgent">Please answer all five questions so the steps match your situation.</p>';
     out.scrollIntoView({behavior:"smooth"});
@@ -618,6 +816,14 @@ if (location.hash === "#selftest"){
   t(!pick(fat).some(x=>/Road rash|symptom log/i.test(x)), "fatal must not show personal-injury self-care");
   t(STEPS.filter(s=>!s.when||s.when(fat)).some(s=>/844\) 377-7337/.test(s.html)),
     "fatal must surface the FSS support line");
+  var sym = k => ({state:"NY",type:"mv",injury:"moderate",when:"scene",police:"yes",sym:new Set(k)});
+  t(pick(sym(["wrist"])).some(x=>/scaphoid/.test(x)), "wrist symptom must surface the scaphoid warning");
+  t(!pick(sym([])).some(x=>/scaphoid/.test(x)), "unselected symptoms must stay hidden");
+  t(pick(sym(["bleed","abdo"])).length > pick(sym(["bleed"])).length,
+    "each selected symptom must add a step");
+  t(pick(sym(["head"])).some(x=>/911/.test(x)) , "symptom answers must still show the 911 red flags");
+  t(!pick({state:"NY",type:"mv",injury:"fatal",when:"later",police:"yes",sym:new Set(["rash"])})
+     .some(x=>/Road rash/.test(x)), "fatal must not show first aid for the reader");
   document.title = "selftest passed";
   console.log("selftest passed");
 }
