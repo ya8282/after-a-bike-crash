@@ -1,0 +1,36 @@
+name: Correction
+description: Something on the page is wrong, outdated, or misleading
+labels: ["correction"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks. Factual errors here can cost someone a claim, so these get priority.
+  - type: input
+    id: location
+    attributes:
+      label: What does the page currently say?
+      description: Quote it, or name the step title.
+    validations:
+      required: true
+  - type: textarea
+    id: correct
+    attributes:
+      label: What should it say?
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: Source
+      description: Link to the statute, agency page, or form. If you don't have one, say so and file it anyway.
+    validations:
+      required: true
+  - type: dropdown
+    id: state
+    attributes:
+      label: Which state?
+      multiple: true
+      options: ["New York", "New York City", "New Jersey", "Connecticut", "All / not state-specific"]
+    validations:
+      required: true

@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: I was just in a crash and need help now
+    url: https://www.familiesforsafestreets.org/national-resource-guide
+    about: Please don't open an issue. Call 911 if anyone is hurt, or Families for Safe Streets at (844) 377-7337 for free peer support.

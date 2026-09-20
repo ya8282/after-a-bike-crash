@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>After a Bike Crash</title>
+<meta name="description" content="Next steps after a bicycle crash in New York, New Jersey, or Connecticut.">
+<style>
+:root{
+  --bg:#fbfaf8; --surface:#fff; --line:#e0dcd4; --ink:#1c1a17; --muted:#5d574e;
+  --accent:#0a5c4a; --accent-ink:#fff; --urgent:#a01b1b; --urgent-bg:#fdecec;
+  --warn-bg:#fff6e3; --warn-line:#e6c682; --radius:10px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#16181a; --surface:#1e2124; --line:#33383d; --ink:#eceae6; --muted:#a8a29a;
+    --accent:#4fbfa2; --accent-ink:#10231e; --urgent:#ff8b8b; --urgent-bg:#2e1a1a;
+    --warn-bg:#2b2412; --warn-line:#6b5723;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#16181a; --surface:#1e2124; --line:#33383d; --ink:#eceae6; --muted:#a8a29a;
+  --accent:#4fbfa2; --accent-ink:#10231e; --urgent:#ff8b8b; --urgent-bg:#2e1a1a;
+  --warn-bg:#2b2412; --warn-line:#6b5723;
+}
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font:17px/1.6 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  -webkit-text-size-adjust:100%;
+}
+.wrap{max-width:760px; margin:0 auto; padding:0 16px 64px}
+h1{font-size:1.9rem; line-height:1.2; margin:.6em 0 .2em}
+h2{font-size:1.3rem; margin:2em 0 .4em}
+h3{font-size:1.05rem; margin:1.4em 0 .3em}
+p,li{margin:.5em 0}
+a{color:var(--accent)}
+.sub{color:var(--muted)}
+.emergency{
+  background:var(--urgent-bg); border-bottom:2px solid var(--urgent);
+  color:var(--ink); padding:12px 16px;
+}
+.emergency strong{color:var(--urgent)}
+.emergency .inner{max-width:760px; margin:0 auto}
+fieldset{border:1px solid var(--line); border-radius:var(--radius); background:var(--surface); margin:18px 0; padding:14px 16px}
+legend{font-weight:600; padding:0 6px}
+.opts{display:flex; flex-wrap:wrap; gap:8px; margin-top:6px}
+label.opt{
+  display:block; border:1px solid var(--line); border-radius:var(--radius);
+  padding:10px 14px; cursor:pointer; background:var(--bg); min-height:44px;
+  display:flex; align-items:center;
+}
+label.opt input{margin-right:9px; width:18px; height:18px; accent-color:var(--accent)}
+label.opt:has(input:checked){border-color:var(--accent); box-shadow:inset 0 0 0 1px var(--accent)}
+label.opt:focus-within{outline:2px solid var(--accent); outline-offset:2px}
+.hint{color:var(--muted); font-size:.9rem; margin:2px 0 0}
+button{
+  font:inherit; font-weight:600; padding:13px 22px; min-height:48px;
+  border-radius:var(--radius); border:1px solid var(--accent);
+  background:var(--accent); color:var(--accent-ink); cursor:pointer;
+}
+button.ghost{background:transparent; color:var(--accent)}
+.actions{display:flex; gap:10px; flex-wrap:wrap; margin:18px 0}
+.step{border:1px solid var(--line); border-left:4px solid var(--accent); background:var(--surface);
+  border-radius:var(--radius); padding:12px 16px; margin:12px 0}
+.step.urgent{border-left-color:var(--urgent); background:var(--urgent-bg)}
+.step.deadline{border-left-color:var(--warn-line); background:var(--warn-bg)}
+.step h3{margin-top:0}
+.tag{display:inline-block; font-size:.75rem; letter-spacing:.04em; text-transform:uppercase;
+  color:var(--muted); border:1px solid var(--line); border-radius:99px; padding:2px 9px; margin-bottom:6px}
+.check{list-style:none; padding-left:0}
+.check li{padding-left:1.7em; position:relative}
+.check li::before{content:"☐"; position:absolute; left:0; font-size:1.1em}
+footer{margin-top:48px; padding-top:18px; border-top:1px solid var(--line); color:var(--muted); font-size:.9rem}
+#result:empty{display:none}
+@media print{
+  .noprint{display:none !important}
+  body{background:#fff; color:#000; font-size:12pt}
+  .step{break-inside:avoid; border-left-width:3px}
+}
+</style>
+</head>
+<body>
+
+<div class="emergency">
+  <div class="inner">
+    <strong>If anyone is badly hurt, stop reading and call 911.</strong>
+    Head injury, heavy bleeding, trouble breathing, a limb that looks wrong, or
+    any loss of consciousness means an ambulance, not a bike ride home.
+    In a mental-health crisis, call or text <strong>988</strong>.
+  </div>
+</div>
+
+<div class="wrap">
+<h1>After a bike crash</h1>
+<p class="sub">
+  A checklist for people who were just in a bicycle crash in New York, New Jersey,
+  or Connecticut. Answer a few questions and it will lay out what to do, in order.
+  Nothing here is legal or medical advice, and deadlines below are the general rule,
+  not a promise about your case.
+</p>
+
+<form id="q" class="noprint">
+
+<fieldset>
+  <legend>Where did it happen?</legend>
+  <div class="opts" data-name="state">
+    <label class="opt"><input type="radio" name="state" value="NY">New York</label>
+    <label class="opt"><input type="radio" name="state" value="NYC">New York City</label>
+    <label class="opt"><input type="radio" name="state" value="NJ">New Jersey</label>
+    <label class="opt"><input type="radio" name="state" value="CT">Connecticut</label>
+  </div>
+</fieldset>
+
+<fieldset>
+  <legend>What happened?</legend>
+  <div class="opts" data-name="type">
+    <label class="opt"><input type="radio" name="type" value="mv">A motor vehicle hit me</label>
+    <label class="opt"><input type="radio" name="type" value="hitrun">A driver hit me and left</label>
+    <label class="opt"><input type="radio" name="type" value="door">I was doored</label>
+    <label class="opt"><input type="radio" name="type" value="road">Pothole, grate, or bad road</label>
+    <label class="opt"><input type="radio" name="type" value="solo">Solo crash or another cyclist</label>
+    <label class="opt"><input type="radio" name="type" value="ped">A pedestrian and I collided</label>
+  </div>
+</fieldset>
+
+<fieldset>
+  <legend>How bad are the injuries?</legend>
+  <div class="opts" data-name="injury">
+    <label class="opt"><input type="radio" name="injury" value="fatal">Someone was killed</label>
+    <label class="opt"><input type="radio" name="injury" value="severe">Serious: ER now</label>
+    <label class="opt"><input type="radio" name="injury" value="head">I hit my head</label>
+    <label class="opt"><input type="radio" name="injury" value="moderate">Hurt but walking</label>
+    <label class="opt"><input type="radio" name="injury" value="minor">Scrapes, feel okay</label>
+  </div>
+</fieldset>
+
+<fieldset>
+  <legend>Where are you right now?</legend>
+  <div class="opts" data-name="when">
+    <label class="opt"><input type="radio" name="when" value="scene">Still at the scene</label>
+    <label class="opt"><input type="radio" name="when" value="today">Left the scene, same day</label>
+    <label class="opt"><input type="radio" name="when" value="later">Days or weeks later</label>
+  </div>
+</fieldset>
+
+<fieldset>
+  <legend>Did police respond?</legend>
+  <div class="opts" data-name="police">
+    <label class="opt"><input type="radio" name="police" value="yes">Yes, a report was made</label>
+    <label class="opt"><input type="radio" name="police" value="no">No</label>
+    <label class="opt"><input type="radio" name="police" value="unsure">Not sure</label>
+  </div>
+</fieldset>
+
+<div class="actions">
+  <button type="submit">Show my next steps</button>
+  <button type="button" class="ghost" id="reset">Start over</button>
+</div>
+</form>
+
+<div id="result" aria-live="polite"></div>
+
+<footer>
+  General information only, not legal or medical advice, and no attorney-client
+  relationship. <strong>This page has not been reviewed by an attorney in any
+  state.</strong> Laws, forms, and deadlines change. Confirm anything that matters
+  with the agency itself or with a lawyer licensed in your state before you rely
+  on it. If you are close to a deadline, talk to a lawyer today rather than
+  reading further.
+</footer>
+</div>
+
+<script>
+// ponytail: plain data + filter. Rules stay readable; no template engine.
+// Each step: {tag, title, html, when(a) -> bool, cls}
+var STEPS = [
+
+// ---------- someone was killed ----------
+{when:a=>a.injury==="fatal", cls:"urgent", tag:"First", title:"You do not have to work this out alone",
+ html:`<p>Families for Safe Streets is run by people who have lost someone to a traffic
+ crash or been seriously injured themselves. They offer free peer mentoring, monthly
+ support groups, and help with the logistics below, to anyone in the United States.</p>
+ <p><strong>(844) 377-7337</strong> &middot;
+ <a href="mailto:info@familiesforsafestreets.org">info@familiesforsafestreets.org</a> &middot;
+ <a href="https://www.familiesforsafestreets.org/national-resource-guide">Post-Crash Resource Guide</a>
+ (also in <a href="https://ny.familiesforsafestreets.org/resource-guides">Spanish and Chinese</a>).</p>
+ <p>Nothing below has to happen today. It is here so that when you are ready, or when
+ someone asks you a question you were not expecting, you know what it is about.</p>`},
+
+{when:a=>a.injury==="fatal", cls:"urgent", tag:"First", title:"Say nothing to any insurer, and sign nothing",
+ html:`<p>An adjuster may call within days, sometimes before the funeral, and may be kind
+ and sympathetic. Do not give a recorded statement, do not sign a release or a medical
+ authorization, and do not accept any payment. Take their name and claim number, say a
+ lawyer will be in touch, and hang up.</p>
+ <p>The same goes for anyone asking you to sign for a "quick" payout of funeral costs.</p>`},
+
+{when:a=>a.injury==="fatal", cls:"deadline", tag:"Investigation", title:"The police investigation, and what to ask for",
+ html:`<p>Fatal and critical-injury crashes are handled by a specialist unit rather than
+ the responding patrol officer. In New York City that is the NYPD Collision Investigation
+ Squad; elsewhere it is a state police or county reconstruction unit.</p>
+ <ul class="check">
+ <li>Get the name, unit, and direct number of the investigating detective, and ask in writing for updates.</li>
+ <li>Ask whether the case has been referred to the District Attorney or county prosecutor, and ask for that office's victim advocate.</li>
+ <li>Ask what happened to the bicycle, helmet, phone, and clothing. They are usually held as evidence. Do not let them be discarded, and photograph everything before anyone repairs or cleans it.</li>
+ <li>Nearby camera footage is often overwritten within days. Ask investigators to preserve it, and ask nearby businesses yourself.</li>
+ <li>You are entitled to the crash report and, in most cases, the reconstruction file. Ask how to request both.</li>
+ </ul>
+ <p>Investigations often close quietly with no charges. That outcome does not decide your
+ civil claim, which is separate and has its own deadlines.</p>`},
+
+{when:a=>a.injury==="fatal", tag:"Practical", title:"Death certificate, medical examiner, and the estate",
+ html:`<p>You will need certified copies of the death certificate, and more than you expect:
+ order at least ten. The funeral home usually orders them for you.</p>
+ <p>The medical examiner or coroner will likely perform an autopsy. You can request the
+ report later; it can matter in a claim.</p>
+ <p>A wrongful death claim is brought by a personal representative of the estate, not by
+ the family directly, and that appointment happens in Surrogate's Court in New York,
+ Superior Court in New Jersey, or Probate Court in Connecticut. It takes time, which is
+ one reason to talk to a lawyer well before the deadline.</p>`},
+
+{when:a=>a.injury==="fatal", tag:"Practical", title:"Crime victim compensation can cover funeral costs",
+ html:`<p>Each state runs a fund that can reimburse funeral and burial expenses, counseling,
+ and lost support for families of people killed by a criminal act, which can include a
+ vehicular offense. These are separate from any lawsuit, and they have their own filing
+ deadlines, often measured in months.</p>
+ <ul>
+ <li>New York: Office of Victim Services, <a href="https://ovs.ny.gov">ovs.ny.gov</a></li>
+ <li>New Jersey: Victims of Crime Compensation Office, <a href="https://njvictims.nj.gov">njvictims.nj.gov</a></li>
+ <li>Connecticut: Judicial Branch Office of Victim Services, <a href="https://jud.ct.gov/crimevictim">jud.ct.gov/crimevictim</a></li>
+ </ul>`},
+
+{when:a=>a.injury==="fatal" && ["NY","NYC"].includes(a.state), cls:"deadline", tag:"Deadlines",
+ title:"New York: wrongful death is two years, not three",
+ html:`<p>New York's wrongful death deadline is <strong>two years from the date of death</strong>,
+ shorter than the three years for personal injury, and it runs from death rather than from
+ the crash. A survival claim for the pain your person suffered before dying has its own
+ timing. An estate representative must be appointed before the case can be filed.</p>
+ <p>If a city, county, public authority such as the MTA, or the State may be responsible,
+ a formal <strong>notice of claim is due within 90 days</strong>. That is the real deadline.
+ Call a lawyer this week, not this year.</p>`},
+
+{when:a=>a.injury==="fatal" && a.state==="NJ", cls:"deadline", tag:"Deadlines",
+ title:"New Jersey: two years, and 90 days against a public entity",
+ html:`<p>New Jersey's wrongful death deadline is generally <strong>two years from the date
+ of death</strong>, brought by the estate's personal representative.</p>
+ <p>Under the Tort Claims Act, a claim against a public entity or employee requires written
+ notice <strong>within 90 days</strong>. That covers towns, counties, the state, and many
+ authorities.</p>`},
+
+{when:a=>a.injury==="fatal" && a.state==="CT", cls:"deadline", tag:"Deadlines",
+ title:"Connecticut: two years from death, five years outside",
+ html:`<p>Connecticut's wrongful death deadline is generally <strong>two years from the date
+ of death</strong>, and in no event more than five years from the act that caused it. The
+ claim is brought by the executor or administrator of the estate.</p>
+ <p>If the road itself was a cause, the highway defect statutes require written notice to
+ the town or the state commissioner <strong>within 90 days</strong>, and courts apply the
+ content requirements strictly. Put that one in a lawyer's hands immediately.</p>`},
+
+{when:a=>a.injury==="fatal", tag:"Legal", title:"Choosing a lawyer, without being rushed",
+ html:`<p>Consultations are free and these cases are taken on contingency, so talking to
+ someone early costs nothing. Ask how many cyclist or pedestrian fatality cases they have
+ handled, who will actually work on the file, and how they communicate.</p>
+ <p>If a lawyer contacts you first, unsolicited, be wary. Ask the advocacy organizations
+ below or a state bar referral service instead.</p>`},
+
+{when:a=>a.injury==="fatal", tag:"Grief", title:"Grief, and the parts nobody warns you about",
+ html:`<p>Traumatic loss is not ordinary grief. Intrusive images, anger at the investigation,
+ guilt over details that were never yours to control, and exhaustion from paperwork are all
+ common, and they can arrive months later. Trauma-informed therapy helps, and grief groups
+ of people who lost someone the same way help in a different way.</p>
+ <p>Reporters may contact you. You are never obligated to speak to them, and you can ask a
+ friend to field it.</p>
+ <p>In crisis, call or text <strong>988</strong>. Families for Safe Streets peer mentoring is
+ at <strong>(844) 377-7337</strong>.</p>`},
+
+// ---------- at the scene ----------
+{when:a=>a.when==="scene", cls:"urgent", tag:"Right now", title:"Get out of traffic, then stay put",
+ html:`<p>Move yourself and the bike to a sidewalk or shoulder if you can do it safely.
+ If your neck or back hurts, or you cannot feel part of your body, do not move: call 911 and wait.</p>
+ <p>Do not tell anyone you are fine. Adrenaline hides injuries for hours. Say
+ "I need to be checked out."</p>`},
+
+{when:a=>a.when==="scene" && ["mv","door","ped"].includes(a.type), cls:"urgent", tag:"Right now",
+ title:"Do not let the other person leave, and do not settle at the curb",
+ html:`<ul class="check">
+ <li>Ask for their driver's license, insurance card, and license plate. Photograph all three.</li>
+ <li>Photograph the vehicle, including the plate and any damage.</li>
+ <li>Do not accept cash, a promise to pay, or "let's keep insurance out of it." You do not yet know what your injuries cost.</li>
+ <li>Do not apologize or guess at fault. Describe facts only.</li>
+ </ul>`},
+
+{when:a=>a.when==="scene", tag:"Right now", title:"Call the police, even for a minor crash",
+ html:`<p>A police report is the single most useful document you can have later,
+ for insurance and for any claim. Officers sometimes tell cyclists a report is not
+ needed. Ask anyway, politely and clearly: "I want a report, and I am injured."</p>
+ <p>Get the officer's name, badge number, and the report or complaint number before they leave.</p>`},
+
+{when:a=>a.when==="scene", tag:"Right now", title:"Collect what disappears in ten minutes",
+ html:`<ul class="check">
+ <li>Names and phone numbers of every witness. People leave fast; a name with no number is worthless.</li>
+ <li>Wide photos showing the whole scene, the road, signals, sightlines, and lane markings.</li>
+ <li>Close photos of your bike, your helmet, your injuries, and your torn clothing.</li>
+ <li>Look up: note any storefront, doorbell, traffic, or bus cameras pointing at the spot. Footage is often overwritten within days.</li>
+ <li>Write down the time, weather, and light conditions.</li>
+ </ul>`},
+
+// ---------- medical ----------
+{when:a=>a.injury==="severe", cls:"urgent", tag:"Medical", title:"Emergency room, by ambulance",
+ html:`<p>Call 911. Do not drive yourself and do not have a friend drive you if there
+ is any chance of a head, neck, spine, or internal injury. The ambulance record is also
+ evidence that you were hurt at the scene.</p>`},
+
+{when:a=>a.injury==="head", cls:"urgent", tag:"Medical", title:"Get your head checked today",
+ html:`<p>Any impact to the head deserves a same-day evaluation, even with a helmet on
+ and even if you never lost consciousness.</p>
+ <p><strong>Go to an emergency room now</strong> if you have: worsening headache, repeated
+ vomiting, confusion or trouble finding words, unequal pupils, seizure, clear fluid from
+ the nose or ear, weakness or numbness, or you cannot remember the crash. Anyone on a
+ blood thinner should be seen regardless of how they feel.</p>
+ <p>Do not ride home. Have someone stay with you tonight.</p>`},
+
+{when:a=>["moderate","minor"].includes(a.injury), tag:"Medical",
+ title:"See a doctor within 24 to 72 hours anyway",
+ html:`<p>Soft-tissue injuries, concussions, and cracked ribs routinely show up a day or
+ two later. Two reasons to go early: your health, and the gap in treatment that an
+ insurer will later use to argue you were not really hurt.</p>
+ <p>Tell the provider it was a bicycle crash and describe every sore spot, not just
+ the worst one. Untreated complaints do not exist on paper.</p>`},
+
+{when:a=>["head","moderate","minor"].includes(a.injury), tag:"Medical", title:"Road rash and your gear",
+ html:`<p>Wash road rash with soap and water, get the grit out, keep it moist with
+ ointment and a non-stick dressing rather than letting it scab dry. Watch for spreading
+ redness, pus, or fever, and get a tetanus booster if yours is more than five years old.</p>
+ <p>Replace any helmet that took an impact, even if it looks fine. Do not repair or wash
+ the bike, the helmet, or the clothes yet: they are evidence. Photograph everything first
+ and put it in a bag.</p>`},
+
+{when:a=>a.injury!=="fatal", tag:"Medical", title:"Start a symptom log today",
+ html:`<p>Once a day, in a notes app: pain level, what you could not do, sleep, mood,
+ missed work, appointments. It takes a minute and it is far more persuasive months
+ later than trying to remember.</p>`},
+
+// ---------- reporting ----------
+{when:a=>["NY","NYC"].includes(a.state) && a.type!=="solo", cls:"deadline", tag:"Reporting", title:"New York: file form MV-104 within 10 days",
+ html:`<p>New York requires a written report to the DMV within 10 days of a crash
+ involving injury, death, or more than $1,000 of property damage. A bicycle crash with
+ a motor vehicle counts, and your bike and gear count toward that damage figure. The
+ form is <strong>MV-104</strong> (the driver's is MV-104A), available at
+ <a href="https://dmv.ny.gov">dmv.ny.gov</a>. Keep a copy of what you send.</p>`},
+
+{when:a=>a.state==="NYC", tag:"Reporting", title:"New York City: get the collision report and use 311",
+ html:`<p>NYPD collision reports can be requested online through the NYPD Collision Report
+ Retrieval System, generally a few days after the crash. Search "NYPD collision report" on
+ <a href="https://nyc.gov">nyc.gov</a>. You will need the date, location, and report number.</p>
+ <p>Report the street condition, signal, or dangerous intersection to <strong>311</strong>
+ as well. That creates a dated public record of the hazard.</p>`},
+
+{when:a=>a.state==="NJ" && a.type!=="solo", cls:"deadline", tag:"Reporting", title:"New Jersey: report to police, and file within 10 days if they did not investigate",
+ html:`<p>New Jersey requires crashes involving injury, death, or apparent property damage
+ over $500 to be reported to police immediately. If no officer investigated at the scene,
+ you must file a written report with the NJ Division of State Police within 10 days.
+ Look for the crash report form at <a href="https://nj.gov/njsp">nj.gov/njsp</a>.</p>
+ <p>You can request the police report from the responding department, usually after about
+ five business days, for a small fee.</p>`},
+
+{when:a=>a.state==="CT" && a.type!=="solo", cls:"deadline", tag:"Reporting", title:"Connecticut: make sure a report exists",
+ html:`<p>Connecticut requires reporting crashes involving injury, death, or property damage
+ over $1,000. If police responded, request the report from that department or through the
+ state's crash-report portal. If nobody responded, go to the local police department or the
+ State Police troop that covers the town and file a report in person, as soon as you can.</p>`},
+
+{when:a=>a.police==="no" && a.when!=="scene", cls:"deadline", tag:"Reporting", title:"No report yet: file one now",
+ html:`<p>The longer you wait, the more an insurer will argue the crash did not happen the
+ way you say. Go to the police department covering the location where the crash happened,
+ in person, and ask to file a late report. Bring your photos, your medical paperwork, and
+ any witness contacts.</p>`},
+
+{when:a=>a.type==="hitrun", cls:"urgent", tag:"Reporting", title:"Hit and run: report it immediately",
+ html:`<p>Call 911 now if you have not. Speed matters here, both for catching the driver and
+ for your own insurance claim, which usually requires prompt reporting.</p>
+ <ul class="check">
+ <li>Write down anything you remember about the vehicle now: color, make, body style, partial plate, direction, damage, the driver.</li>
+ <li>Canvass for cameras yourself in the next day or two. Ask businesses and residents to save footage before it overwrites, which can be as little as 72 hours.</li>
+ <li>Ask police for the report number and follow up on the investigation in writing.</li>
+ </ul>`},
+
+{when:a=>a.type==="road", tag:"Reporting", title:"Report the road defect in writing, and date it",
+ html:`<p>Photograph the pothole, grate, or plate with something for scale, from several
+ angles, and note the exact location including the nearest address or intersection.</p>
+ <p>Report it to the city or state agency responsible for that road, in a way that creates
+ a record: 311 in New York City, the municipal public works department elsewhere, or the
+ state DOT for a state highway. Save the confirmation number.</p>
+ <p>Claims against a government for road conditions are unusually hard and unusually fast
+ to expire. See the deadline section below and talk to a lawyer early.</p>`},
+
+// ---------- insurance ----------
+{when:a=>["NY","NYC"].includes(a.state) && ["mv","door","hitrun"].includes(a.type), cls:"deadline", tag:"Insurance",
+ title:"New York no-fault: you have 30 days to apply",
+ html:`<p>New York is a no-fault state, and a cyclist struck by a motor vehicle is generally
+ covered by <em>that vehicle's</em> no-fault insurance, no matter who was at fault. It pays
+ medical bills and a portion of lost wages.</p>
+ <p>You must file the application, form <strong>NF-2</strong>, with the vehicle's insurer
+ <strong>within 30 days of the crash</strong>. This is the deadline cyclists miss most
+ often. Ask the insurer for the form the moment you have the policy number, and send it
+ with proof of delivery.</p>
+ <p>If the driver is unknown or uninsured, the equivalent route is MVAIC, the Motor Vehicle
+ Accident Indemnification Corporation, which has its own short notice deadline. Contact them
+ right away and ask what they need and by when.</p>`},
+
+{when:a=>a.state==="NJ" && ["mv","door","hitrun"].includes(a.type), cls:"deadline", tag:"Insurance",
+ title:"New Jersey PIP: notify an insurer promptly",
+ html:`<p>New Jersey personal injury protection can cover a cyclist hit by a motor vehicle.
+ Which policy pays depends on the rules about your own auto insurance and your household's,
+ so do not assume you have nothing to claim just because you were on a bike.</p>
+ <p>Notify the relevant insurer promptly and ask for the PIP application. Many treatments
+ need pre-authorization, so getting the claim open early protects your bills.</p>
+ <p>If the driver is unknown or uninsured, ask about the Unsatisfied Claim and Judgment
+ Fund, which has a short notice period, on the order of 90 days.</p>`},
+
+{when:a=>a.state==="CT" && ["mv","door","hitrun"].includes(a.type), tag:"Insurance",
+ title:"Connecticut: fault-based, and check your own policy",
+ html:`<p>Connecticut is not a no-fault state, so medical bills generally go through your
+ health insurance first, with a claim against the at-fault driver's liability coverage for
+ the rest.</p>
+ <p>Check your own auto policy even though you were cycling: medical payments coverage and
+ uninsured/underinsured motorist coverage often extend to you as a pedestrian or cyclist,
+ and that is the main source of recovery in a hit-and-run. Notify your own insurer promptly,
+ since these coverages have their own notice requirements.</p>`},
+
+{when:a=>a.type!=="solo", tag:"Insurance", title:"Talking to the other side's insurer",
+ html:`<p>An adjuster will likely call within days, friendly and quick. Before you engage:</p>
+ <ul class="check">
+ <li>Give basic facts only: who, when, where. Nothing about fault or about how you feel.</li>
+ <li>Do not give a recorded statement, and do not sign a medical authorization, until you have talked to a lawyer.</li>
+ <li>Do not accept an early settlement. Once signed, it is final, including for injuries that show up later.</li>
+ <li>Keep every offer, letter, and claim number. Follow up phone calls with a short email summarizing what was said.</li>
+ <li>Stay off social media about the crash and your activities.</li>
+ </ul>`},
+
+{when:a=>a.injury!=="fatal", tag:"Insurance", title:"Your own coverage for the bike and gear",
+ html:`<p>Homeowner's or renter's insurance often covers a damaged bicycle, subject to the
+ deductible. Get a written repair estimate or replacement quote from a shop, and hold on to
+ the original purchase receipts if you have them. Photograph the damage before any repair.</p>
+ <p>Health insurance covers treatment now, and may later assert a lien against any
+ settlement. That is normal. Keep the correspondence.</p>`},
+
+// ---------- legal ----------
+{when:a=>["NY","NYC"].includes(a.state) && a.injury!=="fatal", cls:"deadline", tag:"Deadlines",
+ title:"New York: three years, or 90 days against a government",
+ html:`<p>The general deadline to sue for personal injury in New York is
+ <strong>three years</strong> from the crash.</p>
+ <p>That drops dramatically if a government is involved. Claims against a city, a county,
+ a public authority such as the MTA, or the State typically require a formal
+ <strong>notice of claim within 90 days</strong>, with the lawsuit itself due about a year
+ and 90 days later. Miss the 90 days and the claim is usually gone.</p>
+ <p>If a city bus, a sanitation truck, a police vehicle, a pothole, or any public agency is
+ part of your story, treat 90 days as your real deadline and call a lawyer this week.</p>`},
+
+{when:a=>a.state==="NJ" && a.injury!=="fatal", cls:"deadline", tag:"Deadlines",
+ title:"New Jersey: two years, or 90 days against a public entity",
+ html:`<p>The general deadline to sue for personal injury in New Jersey is
+ <strong>two years</strong> from the crash.</p>
+ <p>Under the New Jersey Tort Claims Act, a claim against a public entity or employee
+ requires written notice <strong>within 90 days</strong>. That covers municipalities,
+ counties, the state, and many authorities.</p>`},
+
+{when:a=>a.state==="CT" && a.injury!=="fatal", cls:"deadline", tag:"Deadlines",
+ title:"Connecticut: two years, and 90 days for a road defect",
+ html:`<p>The general deadline to sue for personal injury in Connecticut is
+ <strong>two years</strong> from the crash.</p>
+ <p>If your crash was caused by the condition of the road itself, Connecticut's highway
+ defect statutes require written notice to the town or the state commissioner
+ <strong>within 90 days</strong>, and courts apply the content requirements of that notice
+ strictly. This is a situation to put in a lawyer's hands immediately, not to draft yourself.</p>`},
+
+{when:a=>a.type!=="solo" && !["minor","fatal"].includes(a.injury), tag:"Legal", title:"Talk to a lawyer, early and for free",
+ html:`<p>Personal injury consultations are free and these lawyers work on contingency, so
+ an early conversation costs you nothing. Early matters: evidence disappears, camera footage
+ overwrites, and the short government deadlines above run whether or not you knew about them.</p>
+ <p>Look for someone who specifically handles bicycle cases. State and county bar
+ associations run lawyer referral services, and local cycling advocacy organizations keep
+ lists. Ask how many cyclist cases they have handled and who will actually work on yours.</p>`},
+
+{when:a=>a.type==="solo", tag:"Legal", title:"A solo crash may still be someone's fault",
+ html:`<p>If a road defect, construction plate, debris in a bike lane, a badly maintained
+ path, a defective bike component, or a shop's faulty repair put you down, there may still
+ be a claim. Photograph the cause before it is fixed, report it in writing, and keep the
+ parts. The government deadlines above apply here too.</p>`},
+
+// ---------- self-care and support ----------
+{when:a=>a.injury!=="fatal" && a.injury!=="minor", tag:"Support", title:"Free support from people who have been through it",
+ html:`<p>Families for Safe Streets runs peer mentoring and monthly support groups for
+ people seriously injured in traffic crashes and their caregivers, free, anywhere in the
+ US, plus a guide to dealing with police, insurers, and prosecutors.
+ <strong>(844) 377-7337</strong> &middot;
+ <a href="https://www.familiesforsafestreets.org/national-resource-guide">Post-Crash Resource Guide</a>.</p>
+ <p>The <a href="https://crashsupportnetwork.com/crash-resources/">Crash Support Network</a>
+ is an online community of crash survivors.</p>`},
+
+{when:a=>a.injury!=="fatal", tag:"Recovery", title:"The part people skip",
+ html:`<p>Crashes rattle people. Trouble sleeping, replaying it, flinching at traffic, anger,
+ or dreading the bike is an ordinary response to being hit, not weakness, and it usually
+ eases over a few weeks. If it is not easing, or you are avoiding things you need to do,
+ talk to a doctor or a therapist. Mention the crash: trauma responses are treatable and
+ respond well to early care.</p>
+ <p>In crisis, call or text <strong>988</strong>.</p>
+ <p>When you ride again, go short, go somewhere quiet, and go with someone. Have a shop
+ inspect the frame, fork, and wheels first, especially anything carbon, where damage hides.</p>`},
+
+{when:a=>["NY","NYC"].includes(a.state), tag:"Support", title:"New York support and referrals",
+ html:`<ul>
+ <li><strong>Families for Safe Streets New York</strong>: free peer mentoring, monthly
+ support groups including a Spanish-language one, and a post-crash resource guide.
+ <strong>(844) 377-7337</strong>,
+ <a href="https://ny.familiesforsafestreets.org/support-services">support services</a>,
+ <a href="https://ny.familiesforsafestreets.org/resource-guides">guides in English, Spanish, and Chinese</a>.</li>
+ <li><strong>Transportation Alternatives</strong> maintains a list of law firms that
+ specifically handle cyclist and pedestrian cases, and will help connect you:
+ <a href="https://transalt.org/nyc-bike-resources">transalt.org/nyc-bike-resources</a>.
+ We do not endorse particular firms; that list is theirs.</li>
+ <li><strong>New York Bicycling Coalition</strong>'s crash guide, written by bike crash
+ attorneys: <a href="https://nybc.net/nys-bike-law/in-a-crash-2">nybc.net</a>.</li>
+ <li><a href="https://www.bike.nyc">Bike New York</a> for education and community.</li>
+ <li><strong>211 New York</strong> for free referrals to medical, mental health, and
+ financial assistance near you.</li>
+ <li>New York State Bar Association and your county bar run lawyer referral services.</li>
+ </ul>`},
+
+{when:a=>a.state==="NJ", tag:"Support", title:"New Jersey support and referrals",
+ html:`<ul>
+ <li><strong>Families for Safe Streets</strong> supports crash victims anywhere in the US,
+ free: peer mentoring, support groups, and a
+ <a href="https://www.familiesforsafestreets.org/national-resource-guide">post-crash resource guide</a>.
+ <strong>(844) 377-7337</strong>,
+ <a href="mailto:info@familiesforsafestreets.org">info@familiesforsafestreets.org</a>.</li>
+ <li><a href="https://njbwc.org">New Jersey Bike &amp; Walk Coalition</a> for advocacy and
+ local connections.</li>
+ <li><strong>NJ 211</strong> for referrals to medical, mental health, and financial help.</li>
+ <li>New Jersey State Bar Association lawyer referral service, and your county bar.</li>
+ </ul>`},
+
+{when:a=>a.state==="CT", tag:"Support", title:"Connecticut support and referrals",
+ html:`<ul>
+ <li><strong>Families for Safe Streets</strong> supports crash victims anywhere in the US,
+ free: peer mentoring, support groups, and a
+ <a href="https://www.familiesforsafestreets.org/national-resource-guide">post-crash resource guide</a>.
+ <strong>(844) 377-7337</strong>,
+ <a href="mailto:info@familiesforsafestreets.org">info@familiesforsafestreets.org</a>.</li>
+ <li><a href="https://bikewalkct.org">Bike Walk Connecticut</a> for advocacy and local
+ connections.</li>
+ <li><strong>211 Connecticut</strong> for referrals to medical, mental health, and
+ financial help.</li>
+ <li>Connecticut Bar Association lawyer referral service.</li>
+ </ul>`},
+
+{tag:"Records", title:"One folder, starting today",
+ html:`<p>Put all of it in one place, physical or digital:</p>
+ <ul class="check">
+ <li>Police report number and the report once you get it</li>
+ <li>Every photo and video, originals, not screenshots</li>
+ <li>Witness names and numbers</li>
+ <li>Driver and insurance details</li>
+ <li>Every medical bill, discharge paper, and prescription receipt</li>
+ <li>Repair estimates and receipts for the bike, helmet, gear, and clothing</li>
+ <li>Missed work: dates, hours, and a note from your employer</li>
+ <li>Your daily symptom log</li>
+ <li>Every letter, email, and claim number from any insurer</li>
+ </ul>`}
+];
+
+var form = document.getElementById("q");
+var out = document.getElementById("result");
+
+form.addEventListener("submit", function(e){
+  e.preventDefault();
+  var a = {};
+  new FormData(form).forEach((v,k)=>{ a[k]=v; });
+  if (!a.state || !a.type || !a.injury || !a.when || !a.police){
+    out.innerHTML = '<p class="step urgent">Please answer all five questions so the steps match your situation.</p>';
+    out.scrollIntoView({behavior:"smooth"});
+    return;
+  }
+  var steps = STEPS.filter(s => !s.when || s.when(a));
+  out.innerHTML =
+    '<h2>Your next steps</h2>' +
+    '<p class="sub">In rough order of urgency. Print or save this page to keep it.</p>' +
+    '<div class="actions noprint"><button type="button" id="print">Print or save as PDF</button></div>' +
+    steps.map(s =>
+      '<section class="step ' + (s.cls||'') + '">' +
+      (s.tag ? '<span class="tag">'+s.tag+'</span>' : '') +
+      '<h3>'+s.title+'</h3>' + s.html + '</section>'
+    ).join('');
+  document.getElementById("print").addEventListener("click", ()=>window.print());
+  out.scrollIntoView({behavior:"smooth"});
+});
+
+document.getElementById("reset").addEventListener("click", function(){
+  form.reset();
+  out.innerHTML = "";
+  window.scrollTo({top:0, behavior:"smooth"});
+});
+
+// ponytail: one runnable check. Open with #selftest.
+if (location.hash === "#selftest"){
+  var t = (c,m)=>{ if(!c) throw new Error("selftest: "+m); };
+  var nyc = {state:"NYC",type:"mv",injury:"head",when:"scene",police:"yes"};
+  var pick = a => STEPS.filter(s=>!s.when||s.when(a)).map(s=>s.title);
+  t(pick(nyc).some(x=>/30 days/.test(x)), "NYC motor vehicle must surface the no-fault 30-day step");
+  t(pick(nyc).some(x=>/90 days/.test(x)), "NYC must surface the municipal 90-day notice");
+  t(!pick({state:"CT",type:"solo",injury:"minor",when:"later",police:"no"})
+     .some(x=>/no-fault/i.test(x)), "CT solo crash must not surface NY no-fault");
+  t(pick({state:"NJ",type:"road",injury:"minor",when:"later",police:"no"})
+     .some(x=>/two years/.test(x)), "NJ must surface its two-year deadline");
+  var fat = {state:"NY",type:"mv",injury:"fatal",when:"later",police:"yes"};
+  t(pick(fat).some(x=>/two years, not three/.test(x)), "fatal NY must use the wrongful-death deadline");
+  t(!pick(fat).some(x=>/three years/.test(x)), "fatal NY must not show the 3-year injury deadline");
+  t(!pick(fat).some(x=>/Road rash|symptom log/i.test(x)), "fatal must not show personal-injury self-care");
+  t(STEPS.filter(s=>!s.when||s.when(fat)).some(s=>/844\) 377-7337/.test(s.html)),
+    "fatal must surface the FSS support line");
+  document.title = "selftest passed";
+  console.log("selftest passed");
+}
+</script>
+</body>
+</html>

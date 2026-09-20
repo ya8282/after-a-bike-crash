@@ -1,0 +1,23 @@
+name: Suggestion
+description: A missing situation, a gap in the advice, or a usability problem
+labels: ["suggestion"]
+body:
+  - type: textarea
+    id: situation
+    attributes:
+      label: What situation isn't covered well?
+      description: The more concrete the person you have in mind, the better.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: What should the page do or say instead?
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: Source, if this involves a legal or medical claim
+    validations:
+      required: false
