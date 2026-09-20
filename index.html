@@ -102,13 +102,24 @@
   </div>
 </fieldset>
 
-<div class="actions">
-  <button type="submit">Show my next steps</button>
-  <button type="button" class="ghost" id="reset">Start over</button>
+<p class="hint noprint">
+  Screen wet? Wipe it on something dry, or the phone may not feel your taps.
+  Hands bloody or shaking? Hand the phone to someone and have them read this to you.
+</p>
+
+<div class="actions sticky">
+  <button type="submit" class="wide">Show my next steps</button>
 </div>
+<p class="escape noprint">
+  <button type="button" class="small" id="showall">Screen not working? Show every step</button>
+</p>
 </form>
 
 <div id="result" aria-live="polite"></div>
+
+<div class="danger-zone noprint">
+  <button type="button" class="ghost small" id="reset">Clear my answers and start over</button>
+</div>
 
 <footer>
   General information only, not legal or medical advice, and no attorney-client
@@ -710,10 +721,14 @@ form.addEventListener("submit", function(e){
     out.scrollIntoView({behavior:"smooth"});
     return;
   }
-  var steps = STEPS.filter(s => !s.when || s.when(a));
+  save(a);
+  render(STEPS.filter(s => !s.when || s.when(a)), "In rough order of urgency. Print or save this page to keep it.");
+});
+
+function render(steps, note){
   out.innerHTML =
     '<h2>Your next steps</h2>' +
-    '<p class="sub">In rough order of urgency. Print or save this page to keep it.</p>' +
+    '<p class="sub">' + note + '</p>' +
     '<div class="actions noprint"><button type="button" id="print">Print or save as PDF</button></div>' +
     steps.map(s =>
       '<section class="step ' + (s.cls||'') + '">' +
@@ -722,13 +737,38 @@ form.addEventListener("submit", function(e){
     ).join('');
   document.getElementById("print").addEventListener("click", ()=>window.print());
   out.scrollIntoView({behavior:"smooth"});
+}
+
+// Escape hatch: if tapping the options is not working, one tap shows everything.
+document.getElementById("showall").addEventListener("click", function(){
+  render(STEPS, "Everything, for all three states and every situation. Skip what does not apply to you.");
 });
 
 document.getElementById("reset").addEventListener("click", function(){
   form.reset();
   out.innerHTML = "";
+  try { localStorage.removeItem(KEY); } catch(e){}
   window.scrollTo({top:0, behavior:"smooth"});
 });
+
+// ponytail: answers survive a reload, because a damaged phone reloads a lot.
+// Local to this browser, cleared by Start over.
+var KEY = "abc-answers";
+function save(a){
+  try {
+    localStorage.setItem(KEY, JSON.stringify(Object.assign({}, a, {sym:[...a.sym]})));
+  } catch(e){}
+}
+function restore(){
+  try {
+    var a = JSON.parse(localStorage.getItem(KEY) || "null");
+    if (!a) return;
+    form.querySelectorAll("input").forEach(function(i){
+      i.checked = (i.type === "checkbox") ? (a.sym||[]).includes(i.value) : a[i.name] === i.value;
+    });
+  } catch(e){}
+}
+restore();
 
 // ponytail: one runnable check. Open with #selftest.
 if (location.hash === "#selftest"){

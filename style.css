@@ -1,6 +1,8 @@
 :root{
   --bg:#fbfaf8; --surface:#fff; --line:#e0dcd4; --ink:#1c1a17; --muted:#5d574e;
   --accent:#0a5c4a; --accent-ink:#fff; --urgent:#a01b1b; --urgent-bg:#fdecec;
+  --c-state:#1d4ed8; --c-type:#6d28d9; --c-injury:#b91c1c;
+  --c-sym:#b45309; --c-when:#0f766e; --c-police:#15803d;
   --warn-bg:#fff6e3; --warn-line:#e6c682; --radius:10px;
 }
 @media (prefers-color-scheme: dark){
@@ -8,12 +10,16 @@
     --bg:#16181a; --surface:#1e2124; --line:#33383d; --ink:#eceae6; --muted:#a8a29a;
     --accent:#4fbfa2; --accent-ink:#10231e; --urgent:#ff8b8b; --urgent-bg:#2e1a1a;
     --warn-bg:#2b2412; --warn-line:#6b5723;
+    --c-state:#7aa2ff; --c-type:#c4a5ff; --c-injury:#ff8b8b;
+    --c-sym:#e8b25c; --c-when:#4fbfa2; --c-police:#6ed48a;
   }
 }
 :root[data-theme="dark"]{
   --bg:#16181a; --surface:#1e2124; --line:#33383d; --ink:#eceae6; --muted:#a8a29a;
   --accent:#4fbfa2; --accent-ink:#10231e; --urgent:#ff8b8b; --urgent-bg:#2e1a1a;
   --warn-bg:#2b2412; --warn-line:#6b5723;
+  --c-state:#7aa2ff; --c-type:#c4a5ff; --c-injury:#ff8b8b;
+  --c-sym:#e8b25c; --c-when:#4fbfa2; --c-police:#6ed48a;
 }
 *{box-sizing:border-box}
 body{
@@ -36,23 +42,72 @@ a{color:var(--accent)}
 .emergency .inner{max-width:760px; margin:0 auto}
 fieldset{border:1px solid var(--line); border-radius:var(--radius); background:var(--surface); margin:18px 0; padding:14px 16px}
 legend{font-weight:600; padding:0 6px}
-.opts{display:flex; flex-wrap:wrap; gap:8px; margin-top:6px}
+.opts{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:12px; margin-top:8px}
+
+/* Toggle buttons. The native input stays for keyboard, screen readers and
+   voice control ("tap Neck or back pain"); only its box is hidden.
+   ponytail: no JS state, :has() does it. */
 label.opt{
-  display:block; border:1px solid var(--line); border-radius:var(--radius);
-  padding:10px 14px; cursor:pointer; background:var(--bg); min-height:44px;
-  display:flex; align-items:center;
+  --sel:var(--accent);
+  position:relative; display:flex; align-items:center; gap:10px;
+  min-height:64px; padding:14px 16px 14px 48px;
+  border:2px solid var(--line); border-radius:14px;
+  background:var(--surface); color:var(--ink);
+  font-size:1.05rem; line-height:1.3; font-weight:500;
+  cursor:pointer; touch-action:manipulation; -webkit-tap-highlight-color:transparent;
+  user-select:none; transition:border-color .08s, background-color .08s;
 }
-label.opt input{margin-right:9px; width:18px; height:18px; accent-color:var(--accent)}
-label.opt:has(input:checked){border-color:var(--accent); box-shadow:inset 0 0 0 1px var(--accent)}
-label.opt:focus-within{outline:2px solid var(--accent); outline-offset:2px}
-.hint{color:var(--muted); font-size:.9rem; margin:2px 0 0}
+label.opt input{position:absolute; opacity:0; width:1px; height:1px; margin:0}
+/* the mark: shape carries the state, not just color */
+label.opt::before{
+  content:""; position:absolute; left:14px; top:50%; transform:translateY(-50%);
+  width:22px; height:22px; border:2px solid var(--muted); border-radius:6px;
+  background:var(--bg);
+}
+label.opt:has(input:checked){
+  --tint:color-mix(in srgb, var(--sel) 14%, var(--surface));
+  border-color:var(--sel); background:var(--tint); font-weight:650;
+}
+label.opt:has(input:checked)::before{
+  border-color:var(--sel); background:var(--sel);
+}
+label.opt:has(input:checked)::after{
+  content:""; position:absolute; left:20px; top:50%;
+  width:6px; height:12px; margin-top:-8px;
+  border:solid var(--surface); border-width:0 3px 3px 0; transform:rotate(45deg);
+}
+label.opt:has(input:focus-visible){outline:3px solid var(--sel); outline-offset:3px}
+@media (hover:hover){ label.opt:hover{border-color:var(--sel)} }
+label.opt:active{transform:scale(.99)}
+
+/* one highlight color per question, so a glance shows what is answered */
+.opts[data-name="state"]  label.opt{--sel:var(--c-state)}
+.opts[data-name="type"]   label.opt{--sel:var(--c-type)}
+.opts[data-name="injury"] label.opt{--sel:var(--c-injury)}
+.opts[data-name="sym"]    label.opt{--sel:var(--c-sym)}
+.opts[data-name="when"]   label.opt{--sel:var(--c-when)}
+.opts[data-name="police"] label.opt{--sel:var(--c-police)}
+
 button{
-  font:inherit; font-weight:600; padding:13px 22px; min-height:48px;
-  border-radius:var(--radius); border:1px solid var(--accent);
+  font:inherit; font-size:1.1rem; font-weight:650; padding:18px 24px; min-height:60px;
+  border-radius:14px; border:2px solid var(--accent);
   background:var(--accent); color:var(--accent-ink); cursor:pointer;
+  touch-action:manipulation; -webkit-tap-highlight-color:transparent;
 }
 button.ghost{background:transparent; color:var(--accent)}
-.actions{display:flex; gap:10px; flex-wrap:wrap; margin:18px 0}
+button.wide{width:100%}
+button.small{font-size:.95rem; min-height:48px; padding:12px 18px; font-weight:600}
+button:focus-visible{outline:3px solid var(--sel,var(--accent)); outline-offset:3px}
+.actions{display:flex; gap:12px; flex-wrap:wrap; margin:18px 0}
+/* thumb-reachable and always on screen, so no precise scrolling to a dead
+   patch of a cracked display */
+.actions.sticky{
+  position:sticky; bottom:0; z-index:5; margin:18px -16px 0; padding:12px 16px;
+  background:var(--bg); border-top:1px solid var(--line);
+}
+.escape{margin:10px 0 0; text-align:center}
+.escape button{background:transparent; color:var(--muted); border-color:var(--line); font-weight:600}
+.danger-zone{margin-top:40px; padding-top:16px; border-top:1px solid var(--line)}
 .step{border:1px solid var(--line); border-left:4px solid var(--accent); background:var(--surface);
   border-radius:var(--radius); padding:12px 16px; margin:12px 0}
 .step.urgent{border-left-color:var(--urgent); background:var(--urgent-bg)}
